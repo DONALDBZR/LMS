@@ -1,4 +1,5 @@
 <?php
+// API class
 class API {
     // Class variables
     private $dataSourceName = "mysql:dbname=LibrarySystem;host=127.0.0.1:3306";
@@ -46,6 +47,10 @@ class API {
     public function resultSet() {
         $this->execute();
         return $this->statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Error Info method
+    public function errorInfo() {
+        return PDO::errorInfo();
     }
 }
 ?>
