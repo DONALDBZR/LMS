@@ -1,0 +1,279 @@
+/* Brandon Grotesque */
+@font-face {
+    font-family: "Brandon Grotesque";
+    src: url("../Fonts/Brandon Grotesque - Black.otf");
+    src: url("../Fonts/Brandon Grotesque - Bold Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light.otf");
+    src: url("../Fonts/Brandon Grotesque - Medium Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Thin Italic.otf");
+}
+/* Proxima Nova */
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("../Fonts/Proxima Nova.otf");
+    src: url("../Fonts/Proxima Nova - Alternate.otf");
+}
+/* CSS Variables */
+:root {
+    --brandonGrotesque: "Brandon Grotesque";
+    --proximaNova: "Proxima Nova";
+    --backgroundColor1: rgb(0, 64, 255);
+    --backgroundColor2: rgb(64, 128, 255);
+    --foregroundColor1: rgb(255, 255, 255);
+    --foregroundColor2: rgb(0, 0, 0);
+    --foregroundColor3: rgba(255, 255, 255, 0.5);
+    --formForegroundColor1: rgba(0, 0, 0, 0.5);
+    --formForegroundColor2: rgba(0, 0, 0, 0.75);
+    --failure: rgb(255, 0, 0);
+    --success: rgb(0, 255, 0);
+    --bold: 700;
+    --extraBold: 800;
+    --horizontal: 100%;
+    --vertical: 100%;
+    --fontSize: 100%;
+    --opacity: 100%;
+    --logoHeight: 104px;
+    --logoWidth: 87px;
+    --time: 1s;
+    --navHeight: 52px;
+    /* Page Styling configuration */
+    background-color: var(--backgroundColor2);
+    color: var(--foregroundColor1);
+    font-size: var(--fontSize);
+    width: var(--horizontal);
+    height: var(--vertical);
+    font-family: sans-serif;
+}
+/* Navigation Bar */
+nav {
+    display: flex;
+    height: calc(var(--logoHeight) / 2);
+}
+#homepageSection,
+#navigationBarComponents {
+    width: calc(var(--horizontal) / 2);
+}
+/* Homepage Section */
+#homepageSection img {
+    width: auto;
+    height: var(--vertical);
+}
+#homepageSection img:hover,
+#navigationBarComponents img:hover {
+    opacity: calc(var(--opacity) / 2);
+}
+/* Navigation Bar Components */
+#navigationBarComponents {
+    display: flex;
+}
+#navigationBarComponents img {
+    width: auto;
+    height: var(--navHeight);
+}
+#navigationBarComponents a {
+    font-size: calc(var(--fontSize) * 3.25);
+}
+#profile,
+#logout {
+    width: calc(var(--horizontal) / 2);
+}
+.faProfileCustom,
+.faLogoutCustom {
+    color: var(--foregroundColor1);
+    background-color: var(--backgroundColor2);
+}
+#profile a {
+    margin: 0 calc(var(--horizontal) * (15017 / 33750));
+}
+#logout a {
+    margin: 0 calc(var(--horizontal) * (482 / 1125));
+}
+.faProfileCustom:hover,
+.faLogoutCustom:hover {
+    opacity: calc(var(--opacity) / 2);
+}
+#navigationBarComponents button {
+    border: none;
+}
+/* Information */
+#information {
+    width: calc(var(--horizontal) * 0.7);
+    margin: calc(var(--vertical) * 0.02) calc(var(--horizontal) * 0.1);
+    padding: calc(var(--horizontal) * 0.05);
+    background-color: var(--foregroundColor1);
+}
+#information h1 {
+    color: var(--formForegroundColor2);
+    font-weight: var(--extraBold);
+    font-family: var(--proximaNova);
+    font-size: calc(var(--fontSize) * 2);
+    margin: 0;
+}
+#information p {
+    color: var(--formForegroundColor1);
+    font-size: var(--fontSize);
+}
+#mail,
+#accountId,
+#type,
+#studentId,
+#password,
+#profilePicture {
+    width: var(--horizontal);
+    display: flex;
+    margin-bottom: calc(var(--vertical) * 0.01);
+    border-bottom: 1px solid var(--foregroundColor2);
+}
+#mail h1,
+#accountId h1,
+#type h1,
+#studentId h1,
+#password h1,
+#profilePicture h1 {
+    font-size: var(--fontSize);
+}
+#contents {
+    width: calc(var(--horizontal) / 2);
+}
+#UserGetMailAddress,
+#UserGetId,
+#UserGetType,
+#UserGetStudentId {
+    font-size: var(--fontSize);
+    color: var(--foregroundColor2);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+}
+#mailNotice,
+#idNotice,
+#typeNotice,
+#studentIdNotice,
+#passwordNotice,
+#profilePictureNotice {
+    font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9));
+    color: var(--failure);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    text-decoration: underline;
+    margin-bottom: calc(var(--vertical) * 0.01);
+}
+#passwordNotice,
+#profilePictureNotice {
+    font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9));
+    color: var(--success);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    text-decoration: underline;
+    margin-bottom: calc(var(--vertical) * 0.01);
+}
+#oldPassword,
+#newPassword,
+#confirmNewPassword,
+#oldUploadButton,
+#faUploadCustom {
+    font-size: var(--fontSize);
+    color: var(--foregroundColor2);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    width: var(--horizontal);
+    margin-bottom: calc(var(--vertical) * 0.01);
+}
+#oldUploadButton {
+    position: absolute;
+    left: calc(var(--horizontal) * 0.5);
+    top: calc(var(--vertical) * 0.92);
+    width: fit-content;
+    opacity: 0;
+    cursor: pointer;
+}
+.faUploadCustom {
+    color: var(--foregroundColor2);
+    background-color: var(--foregroundColor1);
+    border: none;
+}
+#editButton {
+    font-size: calc(var(--fontSize) * 1.46);
+    color: var(--foregroundColor1);
+    background-color: var(--backgroundColor2);
+    border: none;
+    padding: calc(var(--vertical) * 0.025) calc(var(--horizontal) * 0.1);
+    font-weight: var(--extraBold);
+    font-family: var(--proximaNova);
+    margin-left: calc(var(--horizontal) * 0.38);
+    cursor: pointer;
+}
+#editButton:hover {
+    color: var(--backgroundColor2);
+    background-color: var(--foregroundColor1);
+}
+#success,
+#failure {
+    font-family: var(--brandonGrotesque);
+    font-size: calc(var(--fontSize) * 2);
+    font-weight: var(--bold);
+    text-align: center;
+    text-shadow: 0px 0px 8px var(--foregroundColor1);
+}
+#success {
+    color: var(--success);
+}
+#failure {
+    color: var(--failure);
+}
+/* Media Queries to fit on a screen of a smartphone on portrait mode */
+@media screen and (device-width: 360px) and (orientation: portrait) {
+    #UserGetMailAddress,
+    #UserGetId,
+    #UserGetType,
+    #UserGetStudentId {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9 * 0.9));
+    }
+    #information p {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9));
+    }
+    #mailNotice,
+    #idNotice,
+    #typeNotice,
+    #studentIdNotice,
+    #passwordNotice,
+    #profilePictureNotice {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9));
+    }
+    #UserGetPassword,
+    #UserSetPassword,
+    #oldUploadButton,
+    #faUploadCustom {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9));
+        width: var(--horizontal);
+    }
+    #editButton {
+        margin-left: calc(var(--horizontal) * 0.29);
+    }
+    #oldUploadButton {
+        position: absolute;
+        top: calc(var(--vertical) * 1.11);
+    }
+}
+/* Media Queries to fit on a screen of a smartphone on landscape mode */
+@media screen and (device-width: 640px) and (orientation: landscape) {
+    #information p {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9));
+    }
+    #mailNotice,
+    #idNotice,
+    #typeNotice,
+    #studentIdNotice,
+    #passwordNotice,
+    #profilePictureNotice {
+        font-size: calc(var(--fontSize) * (0.9));
+    }
+    #editButton {
+        margin-left: calc(var(--horizontal) * 0.34);
+    }
+    #oldUploadButton {
+        position: absolute;
+        top: calc(var(--vertical) * 1.91);
+    }
+}
