@@ -81,7 +81,6 @@ $User = new User();
             <div id="profilePicture">
                 <div id="profilePictureHeader"></div>
                 <div id="contents">
-                    <button class="fa fa-upload faUploadCustom"></button>
                     <input type="file" name="image" accept="image/*" id="oldUploadButton" required />
                     <div id="profilePictureGuide"></div>
                 </div>
