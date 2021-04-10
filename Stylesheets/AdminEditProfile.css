@@ -224,17 +224,7 @@ nav {
     width: var(--horizontal);
     margin-bottom: calc(var(--vertical) * 0.01);
 }
-.faUploadCustom {
-    color: var(--foregroundColor2);
-    background-color: var(--foregroundColor1);
-    border: none;
-}
 #oldUploadButton {
-    position: absolute;
-    left: calc(var(--horizontal) * 0.5);
-    top: calc(var(--vertical) * 0.82);
-    width: fit-content;
-    opacity: 0;
     cursor: pointer;
 }
 #editButton {
