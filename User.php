@@ -71,21 +71,23 @@ class User {
     }
     // Register method
     public function register() {
-        // Setting the mail address from the register page as a parameter in the mutator.
-        $this->setMailAddress($_POST['mailAddress']);
-        // Setting the student ID from the register page as a parameter in the mutator.
-        $this->setStudentId($_POST['studentId']);
-        // Preparing the query to verify if the mail entered is already in the database.
-        $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserMailAddress = :UserMailAddress");
-        // Binding the value returned by the User class for security purposes.
-        $this->API->bind(":UserMailAddress", $this->getMailAddress());
-        // Executing the query.
-        $this->API->execute();
-        // Verifying whether the result set is 0.  If, it is 0, then, another if-statement will verify if the mail entered belongs to Université Des Mascareignes.  In the condition that the mail belongs to UDM, another if-statement will verify if there is a student Id which has been entered.  In the condition that a student ID has been entered, the account type will be set to 1 else, it will be set to 2 where afterwards it can be changed by the administrator.
-        if (count($this->API->resultSet()) == 0) {
-            if (strpos($this->getMailAddress(), "@student.udm.ac.mu") == true or strpos($this->getMailAddress(), "@udm.ac.mu") == true) {
-                if (!empty($this->getStudentId())) {
-                    // Assigning 1 as the parameter for type's mutator.
+        // If-statement to verify which form is handled by verifying the value returned from the cookie
+        if ($_COOKIE["type"] == "student") {
+            // Setting the mail address from the register page as a parameter in the mutator.
+            $this->setMailAddress($_POST['mailAddress']);
+            // Setting the student ID from the register page as a parameter in the mutator.
+            $this->setStudentId($_POST['studentId']);
+            // Preparing the query to verify if the mail entered is already in the database.
+            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserMailAddress = :UserMailAddress");
+            // Binding the value returned by the User class for security purposes.
+            $this->API->bind(":UserMailAddress", $this->getMailAddress());
+            // Executing the query.
+            $this->API->execute();
+            // If-statement to verify whether the user does not exist
+            if (empty($this->API->resultSet())) {
+                // If-statement to verify the mail of the student
+                if (strpos($this->getMailAddress(), "@student.udm.ac.mu") == true) {
+                    // Assigning 1 as the parameter for the mutator or User.type.
                     $this->setType(1);
                     // Assigning the value returned from Generate Password method as the parameter for password's mutator.
                     $this->setPassword($this->generatePassword());
@@ -115,9 +117,9 @@ class User {
                     // Ensuring that PHPMailer is called from a .html file.
                     $this->Mail->IsHTML(true);
                     // Sender's mail address.
-                    $this->Mail->Username = "";
+                    $this->Mail->Username = "andygaspard003@gmail.com";
                     // Sender's password
-                    $this->Mail->Password = "";
+                    $this->Mail->Password = "Aegis050200";
                     // Assigning sender as a parameter in the sender's zone.
                     $this->Mail->setFrom($this->Mail->Username);
                     // Assinging the receiver mail's address which is retrieved from the User class.
@@ -131,10 +133,36 @@ class User {
                         You have been registered into the system, you will be redirected to the login page.
                     </h1>";
                     // Redirecting the user towards the Login page.
-                    header('refresh: 4; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+                    header('refresh:5.8; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
                 } else {
-                    // Assigning 1 as the parameter for type's mutator.
-                    $this->setType(2);
+                    echo "
+                    <h1 id='failure'>
+                        You cannot have access to this service as you are not a member of this organization!
+                    </h1>";
+                }
+            } else {
+                echo "
+                <h1 id='failure'>
+                    You already have an account on the system!  You will be redirected to the login page!
+                </h1>";
+                // Redirecting the user towards the Login page.
+                header('refresh:1.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+            }
+        } elseif ($_COOKIE["type"] == "staff") {
+            // Setting the mail address from the register page as a parameter in the mutator.
+            $this->setMailAddress($_POST['mailAddress']);
+            // Preparing the query to verify if the mail entered is already in the database.
+            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserMailAddress = :UserMailAddress");
+            // Binding the value returned by the User class for security purposes.
+            $this->API->bind(":UserMailAddress", $this->getMailAddress());
+            // Executing the query.
+            $this->API->execute();
+            // If-statement to verify whether the user does not exist
+            if (empty($this->API->resultSet())) {
+                // If-statement to verify the mail of the student
+                if (strpos($this->getMailAddress(), "@udm.ac.mu") == true) {
+                    // Assigning the value returned by User.registerTypeChecker() as the parameter for the mutator or User.type.
+                    $this->setType($this->registerTypeChecker());
                     // Assigning the value returned from Generate Password method as the parameter for password's mutator.
                     $this->setPassword($this->generatePassword());
                     // Adding the Insert query for the User table.
@@ -143,7 +171,7 @@ class User {
                     $this->API->bind(":UserMailAddress", $this->getMailAddress());
                     $this->API->bind(":UserPassword", $this->getPassword());
                     $this->API->bind(":UserType", $this->getType());
-                    // Executing the query added on line 135.
+                    // Executing the query added on line 90.
                     $this->API->execute();
                     // Calling Is SMTP function from PHPMailer.
                     $this->Mail->IsSMTP();
@@ -162,9 +190,9 @@ class User {
                     // Ensuring that PHPMailer is called from a .html file.
                     $this->Mail->IsHTML(true);
                     // Sender's mail address.
-                    $this->Mail->Username = "";
+                    $this->Mail->Username = "andygaspard003@gmail.com";
                     // Sender's password
-                    $this->Mail->Password = "";
+                    $this->Mail->Password = "Aegis050200";
                     // Assigning sender as a parameter in the sender's zone.
                     $this->Mail->setFrom($this->Mail->Username);
                     // Assinging the receiver mail's address which is retrieved from the User class.
@@ -178,22 +206,21 @@ class User {
                         You have been registered into the system, you will be redirected to the login page.
                     </h1>";
                     // Redirecting the user towards the Login page.
-                    header('refresh: 4; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+                    header('refresh:5.6; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+                } else {
+                    echo "
+                    <h1 id='failure'>
+                        You cannot have access to this service as you are not a member of this organization!
+                    </h1>";
                 }
-                
             } else {
                 echo "
                 <h1 id='failure'>
-                    You cannot have access to this service as you are not a member of this organization!
+                    You already have an account on the system!  You will be redirected to the login page!
                 </h1>";
+                // Redirecting the user towards the Login page.
+                header('refresh:1.0; url=http://stormysystem.ddns.net/LibraryManagementSystem/Login');
             }
-        } else {
-            echo "
-            <h1 id='failure'>
-                You already have an account on the system!  You will be redirected to the login page!
-            </h1>";
-            // Redirecting the user towards the Login page.
-            header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Login');
         }
     }
     // Login method
@@ -277,8 +304,8 @@ class User {
                     $this->Mail->Port = 465;
                     $this->Mail->SMTPSecure = 'ssl';
                     $this->Mail->SMTPAuth = true;
-                    $this->Mail->IsHTML(true);$this->Mail->Username = "";
-                    $this->Mail->Password = "";
+                    $this->Mail->IsHTML(true);$this->Mail->Username = "andygaspard003@gmail.com";
+                    $this->Mail->Password = "Aegis050200";
                     $this->Mail->setFrom($this->Mail->Username);
                     $this->Mail->addAddress($this->getMailAddress());
                     $this->Mail->subject = "Library System: Notification";
@@ -349,8 +376,8 @@ class User {
             $this->Mail->SMTPSecure = 'ssl';
             $this->Mail->SMTPAuth = true;
             $this->Mail->IsHTML(true);
-            $this->Mail->Username = "";
-            $this->Mail->Password = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
+            $this->Mail->Password = "Aegis050200";
             $this->Mail->setFrom($this->Mail->Username);
             $this->Mail->addAddress($this->getMailAddress());
             $this->Mail->subject = "Library System: Notification";
@@ -382,8 +409,8 @@ class User {
                 $this->Mail->SMTPSecure = 'ssl';
                 $this->Mail->SMTPAuth = true;
                 $this->Mail->IsHTML(true);
-                $this->Mail->Username = "";
-                $this->Mail->Password = "";
+                $this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Password = "Aegis050200";
                 $this->Mail->setFrom($this->Mail->Username);
                 $this->Mail->addAddress($this->getMailAddress());
                 $this->Mail->subject = "Library System: Notification";
@@ -465,9 +492,9 @@ class User {
         // Ensuring that PHPMailer is called from a .html file.
         $this->Mail->IsHTML(true);
         // Sender's mail address.
-        $this->Mail->Username = "";
+        $this->Mail->Username = "andygaspard003@gmail.com";
         // Sender's password
-        $this->Mail->Password = "";
+        $this->Mail->Password = "Aegis050200";
         // Assigning sender as a parameter in the sender's zone.
         $this->Mail->setFrom($this->Mail->Username);
         // Assinging the receiver mail's address which is retrieved from the User class.
@@ -524,9 +551,9 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
@@ -571,9 +598,9 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
@@ -1248,6 +1275,14 @@ class User {
             $this->API->bind(":UserStudentId", $_GET['search']);
             // Executing the Update query.
             $this->API->execute();
+        }
+    }
+    // Register Type Checker method
+    public function registerTypeChecker() {
+        if ($_POST["type"] == "non-academics") {
+            return 2;
+        } else if ($_POST["type"] == "academics") {
+            return 3;
         }
     }
 }
