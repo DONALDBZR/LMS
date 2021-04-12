@@ -62,13 +62,12 @@
     --montserrat: "Montserrat";
     --backgroundColor1: rgb(0, 64, 255);
     --backgroundColor2: rgb(64, 128, 255);
-    --backgroundColor3: rgb(255, 255, 255);
+    --backgroundColor3: rgb(255, 128, 64);
     --foregroundColor1: rgb(255, 255, 255);
     --foregroundColor2: rgb(0, 0, 0);
     --foregroundColor3: rgba(255, 255, 255, 0.5);
     --foregroundColor4: rgb(0, 204, 204);
     --foregroundColor5: rgba(0, 0, 0, 0.7);
-    --foregroundColor6: rgb(0, 128, 255);
     --formForegroundColor1: rgba(0, 0, 0, 0.5);
     --formForegroundColor2: rgba(0, 0, 0, 0.75);
     --failure: rgb(255, 0, 0);
@@ -86,98 +85,127 @@
     --semiBold: 600;
     --formBackgroundColor1: rgba(0, 0, 0, 0.1);
     --formBackgroundColor2: rgba(0, 0, 0, 0);
+    --coverHeight: 270px;
     /* Page Styling configuration */
-    background-color: var(--backgroundColor3);
-    color: var(--foregroundColor2);
+    background-color: var(--backgroundColor2);
+    color: var(--foregroundColor1);
     font-size: var(--fontSize);
     width: var(--horizontal);
     height: var(--vertical);
     font-family: sans-serif;
-    margin: 0;
 }
-/* Header */
-header {
-    width: calc(var(--horizontal) * 0.98);
-    padding: calc(var(--horizontal) * 0.01);
+/* Navigation Bar */
+nav {
+    display: flex;
+    height: calc(var(--logoHeight) / 2);
 }
-header h1 {
-    font-family: var(--montserrat);
-    font-size: calc(var(--fontSize) * 2);
-    color: var(--foregroundColor4);
-    margin: 0;
-    text-transform: uppercase;
+#homepageSection,
+#navigationBarComponents {
+    width: calc(var(--horizontal) / 2);
 }
-#failure,
-#success {
+#homepageSection img {
+    width: auto;
+    height: var(--vertical);
+}
+#homepageSection img:hover,
+#navigationBarComponents img:hover,
+.faProfile:hover,
+.faLogout:hover {
+    opacity: calc(var(--opacity) / 2);
+}
+#profile,
+#logout {
+    width: calc(var(--horizontal) / 2);
+}
+#navigationBarComponents {
+    display: flex;
+}
+#navigationBarComponents img {
+    width: auto;
+    height: var(--navHeight);
+}
+#navigationBarComponents a {
+    text-transform: none;
+    color: var(--foregroundColor1);
+    font-size: calc(var(--fontSize) * 3.25);
+    text-decoration: none;
     font-family: var(--proximaNova);
-    font-size: calc(var(--fontSize) * 2 * (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9));
-    font-weight: var(--bold);
+    /* width: calc(var(--horizontal) / 3); */
     text-align: center;
 }
-/* Section */
-section {
-    width: var(--horizontal);
+#navigationBarComponents a:hover {
+    text-decoration: underline;
+    opacity: calc(var(--fontSize) / 2);
+}
+#profile a {
+    margin: 0 calc(var(--horizontal) * 0.444948148);
+}
+#logout a {
+    margin: 0 calc(var(--horizontal) * (482 / 1125));
+}
+/* Reservation List */
+#found {
+    width: calc(var(--horizontal) * 0.9);
+    margin: calc(var(--vertical) * 0.01) calc(var(--horizontal) * 0.05);
+    background-color: var(--foregroundColor1);
     display: flex;
-    margin-top: calc(var(--vertical) * 0.01);
 }
 #left,
 #right {
     width: calc(var(--horizontal) / 2);
 }
 #left img {
-    width: var(--horizontal);
-    height: auto;
+    width: auto;
+    height: var(--coverHeight);
 }
-#homeMessage {
-    font-size: calc(var(--fontSize) * 1.5 * (0.9));
-    font-family: var(--montserrat);
-    text-transform: uppercase;
-    font-weight: var(--semiBold);
-    color: var(--foregroundColor5);
-    margin: calc(var(--vertical) * 0.02) 0;
-    text-align: center;
+#isbn,
+#author,
+#title,
+#publisher,
+#category,
+#action {
+    display: flex;
 }
-#notice {
+#isbn h1,
+#author h1,
+#title h1,
+#publisher h1,
+#category h1,
+#action h1 {
+    font-size: var(--fontSize);
     font-family: var(--proximaNova);
-    text-transform: none;
-    color: var(--foregroundColor6);
-    text-decoration: underline;
-    font-size: calc(var(--fontSize) * (1.1 * 1.1));
-    margin: calc(var(--vertical) * 0.02) 0;
-    text-align: center;
+    font-weight: var(--bold);
+    color: var(--foregroundColor2);
+    width: calc(var(--horizontal) / 2);
 }
-#resetPasswordForm {
-    background-color: var(--formBackgroundColor1);
-    width: calc(var(--horizontal) * 0.7);
-    padding: calc(var(--horizontal) * 0.05);
-    margin: 0 calc(var(--horizontal) * 0.1);
-}
-#mailAddressNotice {
-    font-size: calc(var(--fontSize) * (0.9));
-    color: var(--foregroundColor6);
-    text-decoration: underline;
-    margin: calc(var(--vertical) * 0.01) 0;
-    font-weight: var(--extraBold);
-}
-#mailAddress {
+#action {
     width: var(--horizontal);
-    margin-top: calc(var(--vertical) * 0.01);
 }
-#resetPasswordButton {
-    font-size: calc(var(--fontSize) * (1.1));
+#action form {
+    margin: 0 calc(var(--horizontal) * 0.441534409);
+}
+#action form input {
+    font-family: var(--proximaNova);
+    font-size: var(--fontSize);
+    font-weight: var(--bold);
     color: var(--foregroundColor1);
-    background-color: var(--foregroundColor4);
+    background-color: var(--backgroundColor2);
     border: none;
-    padding: calc(var(--vertical) * 0.025) calc(var(--horizontal) * 0.1);
-    font-weight: var(--extraBold);
-    font-family: var(--proximaNova);
-    margin-left: calc(var(--horizontal) * 0.4 * (0.9));
+    padding: calc(var(--vertical) * 0.1) calc(var(--horizontal) * 0.2);
     cursor: pointer;
 }
-#resetPasswordButton:hover {
-    color: var(--foregroundColor4);
-    background-color: var(--formBackgroundColor2);
-    cursor: pointer;
+#action form input:hover {
+    color: var(--backgroundColor2);
+    background-color: var(--foregroundColor1);
+}
+/* Message status */
+#success,
+#failure {
+    font-family: var(--brandonGrotesque);
+    font-size: calc(var(--fontSize) * 2);
+    font-weight: var(--bold);
+    text-align: center;
+    text-shadow: 0px 0px 8px var(--foregroundColor1);
 }
 #success {
     color: var(--success);
@@ -187,64 +215,7 @@ section {
 }
 /* Media Queries to fit on a screen of a smartphone on portrait mode */
 @media screen and (device-width: 360px) and (orientation: portrait) {
-    /* Header */
-    header h1 {
-        font-size: calc(var(--fontSize) * 2 * (0.9 * 0.9 * 0.9 * 0.9 * 0.9));
-        text-align: center;
-    }
-    /* Section */
-    section {
-        width: var(--horizontal);
-        display: block;
-    }
-    #left,
-    #right {
-        width: var(--horizontal);
-    }
-    #left img {
-        width: calc(var(--horizontal) * (0.9 * 0.9 * 0.9));
-        margin: 0 calc(var(--horizontal) * 0.1355);
-        height: auto;
-    }
-    #homeMessage {
-        font-size: calc(
-            var(--fontSize) * 1.5 *
-                (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9)
-        );
-    }
-    #notice {
-        font-size: calc(var(--fontSize) * (0.9 * 0.9));
-    }
-    #mailAddressNotice {
-        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9));
-    }
-    #resetPasswordButton {
-        margin-left: calc(var(--horizontal) * 0.4 * (0.9 * 0.9));
-    }
 }
 /* Media Queries to fit on a screen of a smartphone on landscape mode */
 @media screen and (device-width: 640px) and (orientation: landscape) {
-    /* Header */
-    header h1 {
-        text-align: center;
-    }
-    /* Section */
-    #homeMessage {
-        font-size: calc(
-            var(--fontSize) * 1.5 *
-                (
-                    0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 *
-                        0.9
-                )
-        );
-    }
-    #notice {
-        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9));
-    }
-    #mailAddressNotice {
-        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9));
-    }
-    #resetPasswordButton {
-        margin-left: calc(var(--horizontal) * 0.4 * (0.9 * 0.9 * 0.95));
-    }
 }
