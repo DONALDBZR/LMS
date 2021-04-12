@@ -117,9 +117,9 @@ class User {
                     // Ensuring that PHPMailer is called from a .html file.
                     $this->Mail->IsHTML(true);
                     // Sender's mail address.
-                    $this->Mail->Username = "";
+                    $this->Mail->Username = "andygaspard003@gmail.com";
                     // Sender's password
-                    $this->Mail->Password = "";
+                    $this->Mail->Password = "Aegis050200";
                     // Assigning sender as a parameter in the sender's zone.
                     $this->Mail->setFrom($this->Mail->Username);
                     // Assinging the receiver mail's address which is retrieved from the User class.
@@ -190,9 +190,9 @@ class User {
                     // Ensuring that PHPMailer is called from a .html file.
                     $this->Mail->IsHTML(true);
                     // Sender's mail address.
-                    $this->Mail->Username = "";
+                    $this->Mail->Username = "andygaspard003@gmail.com";
                     // Sender's password
-                    $this->Mail->Password = "";
+                    $this->Mail->Password = "Aegis050200";
                     // Assigning sender as a parameter in the sender's zone.
                     $this->Mail->setFrom($this->Mail->Username);
                     // Assinging the receiver mail's address which is retrieved from the User class.
@@ -291,7 +291,7 @@ class User {
     // Check Session method
     public function checkSession() {
         // Verifying if, the session ID is the same as the ID of the user and if, it is the case, another switch-statement will verify will check the account type so that the the system will redirect the user to its designated page.
-        if ($_SESSION["id"] = $this->getId()) {
+        if ($_SESSION["id"] == $this->getId()) {
             switch ($this->getType()) {
                 case '0':
                     echo "
@@ -304,8 +304,8 @@ class User {
                     $this->Mail->Port = 465;
                     $this->Mail->SMTPSecure = 'ssl';
                     $this->Mail->SMTPAuth = true;
-                    $this->Mail->IsHTML(true);$this->Mail->Username = "";
-                    $this->Mail->Password = "";
+                    $this->Mail->IsHTML(true);$this->Mail->Username = "andygaspard003@gmail.com";
+                    $this->Mail->Password = "Aegis050200";
                     $this->Mail->setFrom($this->Mail->Username);
                     $this->Mail->addAddress($this->getMailAddress());
                     $this->Mail->subject = "Library System: Notification";
@@ -376,8 +376,8 @@ class User {
             $this->Mail->SMTPSecure = 'ssl';
             $this->Mail->SMTPAuth = true;
             $this->Mail->IsHTML(true);
-            $this->Mail->Username = "";
-            $this->Mail->Password = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
+            $this->Mail->Password = "Aegis050200";
             $this->Mail->setFrom($this->Mail->Username);
             $this->Mail->addAddress($this->getMailAddress());
             $this->Mail->subject = "Library System: Notification";
@@ -409,8 +409,8 @@ class User {
                 $this->Mail->SMTPSecure = 'ssl';
                 $this->Mail->SMTPAuth = true;
                 $this->Mail->IsHTML(true);
-                $this->Mail->Username = "";
-                $this->Mail->Password = "";
+                $this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Password = "Aegis050200";
                 $this->Mail->setFrom($this->Mail->Username);
                 $this->Mail->addAddress($this->getMailAddress());
                 $this->Mail->subject = "Library System: Notification";
@@ -492,9 +492,9 @@ class User {
         // Ensuring that PHPMailer is called from a .html file.
         $this->Mail->IsHTML(true);
         // Sender's mail address.
-        $this->Mail->Username = "";
+        $this->Mail->Username = "andygaspard003@gmail.com";
         // Sender's password
-        $this->Mail->Password = "";
+        $this->Mail->Password = "Aegis050200";
         // Assigning sender as a parameter in the sender's zone.
         $this->Mail->setFrom($this->Mail->Username);
         // Assinging the receiver mail's address which is retrieved from the User class.
@@ -551,9 +551,9 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
@@ -598,9 +598,9 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.

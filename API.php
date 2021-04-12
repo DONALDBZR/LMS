@@ -3,8 +3,8 @@
 class API {
     // Class variables
     private $dataSourceName = "mysql:dbname=LibrarySystem;host=127.0.0.1:3306";
-    private $username = "";
-    private $password = "";
+    private $username = "root";
+    private $password = "Aegis4869";
     private $databaseHandler;
     private $statement;
     // Construcor method

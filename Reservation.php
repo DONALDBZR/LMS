@@ -142,5 +142,108 @@ class Reservation {
             header("refresh:5.0; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Books");
         }
     }
+    // Cancel Reservation method
+    public function cancelReservation() {
+        // Assinging the return value of Cookie's ID as the parameter for the mutator for Reservation.id
+        $this->setId($_COOKIE["id"]);
+        // Preparing the query
+        $this->API->query("DELETE FROM LibrarySystem.Reservation WHERE ReservationId = :ReservationId");
+        // Binding the value for security purposes
+        $this->API->bind(":ReservationId", $this->getId());
+        // Executing the query
+        $this->API->execute();
+        echo "
+        <h1 id='success'>
+            The reservation has been cancelled!
+        </h1>";
+        header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Book");
+    }
+    // View Reserved Book method
+    public function viewReservedBook() {
+        // Assigning the Session's ID as the parameter for the mutator of Reservation.person
+        $this->setPerson($_SESSION["id"]);
+        // Preparing the query
+        $this->API->query("SELECT * FROM LibrarySystem.Reservation WHERE ReservationPerson = :ReservationPerson");
+        // Binding the value for security purposes
+        $this->API->bind(":ReservationPerson", $this->getPerson());
+        // Executing the query
+        $this->API->execute();
+        // If-statement to verify whether the data exists
+        if (!empty($this->API->resultSet())) {
+            // Loop to retrieve and display the data
+            foreach ($this->API->resultSet() as $result) {
+                // Assigning the returned value from API.resultSet().ReservationBook as the parameter for the mutator of Book.isbn
+                $this->Book->setIsbn($result['ReservationBook']);
+                // Preparing the query
+                $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookIsbn = :BookIsbn");
+                // Binding the value for security purposes
+                $this->API->bind(":BookIsbn", $this->Book->getIsbn());
+                // Executing the query
+                $this->API->execute();
+                $bookCover = "http://stormysystem.ddns.net" . $this->API->resultSet()[0]["BookCover"];
+                echo "
+                <div id='found'>
+                    <div id='left'>
+                        <img src='{$bookCover}' />
+                    </div>
+                    <div id='right'>
+                        <div id='isbn'>
+                            <h1>
+                                ISBN:
+                            </h1>
+                            <h1>
+                                {$this->API->resultSet()[0]['BookIsbn']}
+                            </h1>
+                        </div>
+                        <div id='author'>
+                            <h1>
+                                Author:
+                            </h1>
+                            <h1>
+                                {$this->API->resultSet()[0]['BookAuthor']}
+                            </h1>
+                        </div>
+                        <div id='title'>
+                            <h1>
+                                Title:
+                            </h1>
+                            <h1>
+                                {$this->API->resultSet()[0]['BookTitle']}
+                            </h1>
+                        </div>
+                        <div id='publisher'>
+                            <h1>
+                                Publisher:
+                            </h1>
+                            <h1>
+                                {$this->API->resultSet()[0]['BookPublisher']}
+                            </h1>
+                        </div>
+                        <div id='category'>
+                            <h1>
+                                Category:
+                            </h1>
+                            <h1>
+                                {$this->API->resultSet()[0]['BookCategory']}
+                            </h1>
+                        </div>
+                        <div id='action'>
+                            <form method='post'>
+                                <input type='submit' value='Cancel' id='cancelButton {$result['ReservationId']}' name='cancelReservation' onClick='cancelReservationCookie(this.id)' />
+                            </form>
+                        </div>
+                    </div>
+                </div>";
+            }
+        } else {
+            echo "
+            <div id='notFound'>
+                <h1 id='success'>
+                    No book has been reserved! You can reserve all the books that you want as long as it does not exceed the limit. 😉
+                </h1>
+            </div>";
+            header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+        }
+    }
 }
 ?>
