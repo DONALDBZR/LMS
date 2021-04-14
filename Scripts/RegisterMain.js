@@ -1,10 +1,10 @@
 // Show Form function
 function showForm(clickedButton) {
     // Storing HTML element
-    var studentRegistrationForm = document.getElementById(
+    let studentRegistrationForm = document.getElementById(
         "studentRegistrationForm"
     );
-    var staffRegistrationForm = document.getElementById(
+    let staffRegistrationForm = document.getElementById(
         "staffRegistrationForm"
     );
     // If-statement to verify which button is clicked
@@ -52,6 +52,6 @@ function showForm(clickedButton) {
 // Request Server Attention function
 function requestServerAttention(clickedButton) {
     // Removing the Type that is used for styling the Register button
-    var type = clickedButton;
+    let type = clickedButton;
     document.cookie = "type=" + type;
 }
