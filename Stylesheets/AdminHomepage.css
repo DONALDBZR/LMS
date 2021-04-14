@@ -39,6 +39,7 @@
     --logoWidth: 87px;
     --time: 1s;
     --navHeight: 52px;
+    --textAreaHeight: 30px;
     /* Page Styling configuration */
     background-color: var(--backgroundColor3);
     color: var(--foregroundColor1);
@@ -97,4 +98,92 @@ nav {
 }
 #navigationBarComponents button {
     border: none;
+}
+#adminForms {
+    width: var(--horizontal);
+    margin: calc(var(--vertical) * 0.01) 0;
+    display: flex;
+}
+#report,
+#mail {
+    width: calc(var(--horizontal) / 2);
+}
+#report h1,
+#notice {
+    font-size: var(--fontSize);
+    font-family: var(--proximaNova);
+    color: var(--foregroundColor2);
+    text-align: center;
+}
+#reportButton input[type="submit"] {
+    font-size: var(--fontSize);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    color: var(--backgroundColor3);
+    background-color: var(--foregroundColor1);
+    border: none;
+    cursor: pointer;
+    padding: calc(var(--vertical) * 0.05) calc(var(--horizontal) * 0.1);
+}
+#reportButton input[type="submit"]:hover {
+    color: var(--foregroundColor1);
+    background-color: var(--backgroundColor3);
+}
+#reportButton {
+    margin: 0 calc(var(--horizontal) * 0.440511111);
+}
+#mail {
+    background-color: var(--foregroundColor1);
+    padding: calc(var(--vertical) * 0.0003125) calc(var(--horizontal) * 0.01);
+}
+#mail h1 {
+    font-size: calc(var(--fontSize) * 2);
+    font-family: var(--brandonGrotesque);
+    font-weight: var(--bold);
+    color: var(--formForegroundColor2);
+}
+#mail p {
+    font-size: calc(var(--fontSize) * 1.1);
+    font-family: var(--brandonGrotesque);
+    font-weight: var(--bold);
+    color: var(--formForegroundColor1);
+}
+#mail form input[type="text"],
+#mail form input[type="email"] {
+    width: var(--horizontal);
+    font-size: var(--fontSize);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    margin: calc(var(--vertical) * 0.01) 0;
+}
+#sendMailButton input[type="submit"] {
+    font-size: var(--fontSize);
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    color: var(--foregroundColor1);
+    background-color: var(--backgroundColor3);
+    border: none;
+    cursor: pointer;
+    padding: calc(var(--vertical) * 0.05) calc(var(--horizontal) * 0.1);
+}
+#sendMailButton input[type="submit"]:hover {
+    color: var(--backgroundColor3);
+    background-color: var(--foregroundColor1);
+}
+#sendMailButton {
+    margin: calc(var(--vertical) * 0.01) calc(var(--horizontal) * (3289 / 7350));
+}
+#success,
+#failure {
+    font-family: var(--brandonGrotesque);
+    font-size: calc(var(--fontSize) * 2);
+    font-weight: var(--bold);
+    text-align: center;
+    text-shadow: 0px 0px 8px var(--foregroundColor1);
+}
+#success {
+    color: var(--success);
+}
+#failure {
+    color: var(--failure);
 }
