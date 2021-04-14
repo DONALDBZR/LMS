@@ -23,7 +23,7 @@ ob_start();
     <link rel="stylesheet" href="http://stormysystem.ddns.net/LibrarySystem/Stylesheets/AdminBookManagement.css" />
     <link rel="shortcut icon" href="http://stormysystem.ddns.net/LibrarySystem/Images/Logo.ico" type="image/x-icon" />
     <script src="http://stormysystem.ddns.net/LibrarySystem/Scripts/Font-Awesome.js"></script>
-    <script src="http://stormysystem.ddns.net/LibrarySystem/Scripts/AdminBookManagement.js"></script>
+    <script src="http://stormysystem.ddns.net/LibrarySystem/Scripts/AdminBookManagementMain.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->

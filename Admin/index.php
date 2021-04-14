@@ -1,7 +1,16 @@
 <?php
+// Starting Session
 session_start();
-require $_SERVER['DOCUMENT_ROOT'] . '/LibrarySystem/User.php';
+// Importing User.php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/LibrarySystem/User.php';
+// Importing Admin.php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/LibrarySystem/Admin.php';
+// Instantiating User
 $User = new User();
+// Instantiating Admin
+$Admin = new Admin();
+// Starting Output Buffer
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +24,8 @@ $User = new User();
     <title>Library System</title>
 </head>
 <body>
-<nav>
-        <div id='homepageSection'>
-            <a href="./">
-                <img src="../Images/Logo - 1.png" alt="Homepage">
-            </a>
-        </div>
+    <nav>
+        <div id='homepageSection'></div>
         <div id='navigationBarComponents'>
             <div id="profile">
                 <a href="./Profile">
@@ -29,15 +34,39 @@ $User = new User();
                     ?>
                 </a>
             </div>
-            <div id="logout">
-                <a href="./Logout">
-                    <i class="fa fa-sign-out faLogoutCustom"></i>
-                </a>
-            </div>
+            <div id="logout"></div>
         </div>
     </nav>
-    <?php
-    print_r($_SESSION);
-    ?>
+    <h1 id="notice">
+        Other functionalities are in the profile page
+    </h1>
+    <div id="adminForms"></div>
+    <div id="response">
+        <?php
+        // If-statement to verify whether the Generate Report button is pressed
+        if (isset($_POST["generateReport"])) {
+            // Calling Generate Report method
+            $Admin->generateReport();
+        }
+        // If-statement to verify whether the Send Mail Reminder is pressed
+        if (isset($_POST["sendMailReminder"])) {
+            // Calling Send Mail Reminder method
+            $Admin->sendMailReminder();
+        }
+        ?>
+    </div>
+    <!-- CDN Scripts for React.JS -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js" ></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" ></script>
+    <!-- Admin Homepage's script -->
+    <script src="http://stormysystem.ddns.net/LibraryManagementSystem/Scripts/AdminHomepage.js"></script>
 </body>
 </html>
+<?php
+// Storing the contents of the output buffer into a variable
+$html = ob_get_contents();
+// Deleting the contents of the output buffer.
+ob_end_clean();
+// Printing the html page
+echo $html;
+?>
