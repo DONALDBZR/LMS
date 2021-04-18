@@ -97,7 +97,21 @@ ob_start();
                     </div>
                 </div>
             </div>
-            <div id="passwordSection"></div>
+            <div id="passwordSection">
+                <div id="password">
+                    <h1 id="contents">
+                        Password: 
+                    </h1>
+                    <div id="contents">
+                        <input type="password" name="oldPassword" id="oldPassword" placeholder="Password" required />
+                        <input type="password" name="newPassword" id="newPassword" placeholder="New Password" required />
+                        <input type="password" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm New Password" required />
+                        <div id="passwordNotice">
+                            It allows you to actually get access into the system.
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="profilePicture">
                 <h1 id="contents">
                     Profile Picture: 
@@ -126,7 +140,7 @@ ob_start();
 </body>
 </html>
 <?php
-$out = ob_get_contents();
+$html = ob_get_contents();
 ob_end_clean();
-echo $out;
+echo $html;
 ?>
