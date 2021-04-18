@@ -18,6 +18,7 @@ ob_start();
     <link rel="stylesheet" href="http://stormysystem.ddns.net/LibraryManagementSystem/Stylesheets/AdminUserManagement.css" />
     <link rel="shortcut icon" href="http://stormysystem.ddns.net/LibraryManagementSystem/Images/Logo.ico" type="image/x-icon" />
     <script src="http://stormysystem.ddns.net/LibraryManagementSystem/Scripts/Font-Awesome.js"></script>
+    <script src="http://stormysystem.ddns.net/LibraryManagementSystem/Scripts/AdminUserManagementMain.js"></script>
 </head>
 <body>
     <!-- Navigation Bar -->
