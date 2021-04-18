@@ -34,39 +34,6 @@ const typeGuide = React.createElement(
     { id: "typeNotice" },
     "It is the type of the account which is limited by your position in the organization.  For any changes to be made, please contact an administrator."
 );
-const password = [
-    React.createElement("h1", { id: "contents" }, "Password:"),
-    React.createElement(
-        "div",
-        { id: "contents" },
-        React.createElement("input", {
-            type: "password",
-            name: "oldPassword",
-            id: "oldPassword",
-            placeholder: "Password",
-            attribute: "required",
-        }),
-        React.createElement("input", {
-            type: "password",
-            name: "newPassword",
-            id: "newPassword",
-            placeholder: "New Password",
-            attribute: "required",
-        }),
-        React.createElement("input", {
-            type: "password",
-            name: "confirmNewPassword",
-            id: "confirmNewPassword",
-            placeholder: "Confirm New Password",
-            attribute: "required",
-        }),
-        React.createElement(
-            "div",
-            { id: "passwordNotice" },
-            "It allows you to actually get access into the system."
-        )
-    ),
-];
 const profilePictureHeader = React.createElement("h1", {}, "Profile Picture:");
 const profilePictureGuide = React.createElement(
     "div",
@@ -92,7 +59,6 @@ ReactDOM.render(accountHeader, document.getElementById("accountHeader"));
 ReactDOM.render(accountIdGuide, document.getElementById("accountIdGuide"));
 ReactDOM.render(typeHeader, document.getElementById("typeHeader"));
 ReactDOM.render(typeGuide, document.getElementById("typeGuide"));
-ReactDOM.render(password, document.getElementById("password"));
 ReactDOM.render(
     profilePictureHeader,
     document.getElementById("profilePictureHeader")
