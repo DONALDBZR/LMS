@@ -26,7 +26,21 @@ $User = new User();
         <div id="right">
             <div id="loginMessage"></div>
             <div id="loginNotice"></div>
-            <div id="form"></div>
+            <div id="form">
+                <div id="loginForm">
+                    <form method="post">
+                        <input type="email" name="mailAddress" id="mailAddress" placeholder="Mail Address" required />
+                        <div id="mailAddressNotice">
+                            You need to use your UDM Mail to log into this system.
+                        </div>
+                        <input type="password" name="password" id="password" placeholder="Password" required />
+                        <div id="passwordNotice">
+                            You need to use your password to log into the system.
+                        </div>
+                        <input type="submit" value="Log In" id="loginButton" name="login" />
+                    </form>
+                </div>
+            </div>
             <div id="loginReset"></div>
             <?php
             // Calling login function from User class if the login button is pressed.
