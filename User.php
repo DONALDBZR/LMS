@@ -58,7 +58,7 @@ class User {
         $this->password = $password;
     }
     // Student ID mutator method
-    public function setStudentID($studentId) {
+    public function setStudentId($studentId) {
         $this->studentId = $studentId;
     }
     // Type mutator method
@@ -78,62 +78,71 @@ class User {
             // Setting the student ID from the register page as a parameter in the mutator.
             $this->setStudentId($_POST['studentId']);
             // Preparing the query to verify if the mail entered is already in the database.
-            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserMailAddress = :UserMailAddress");
+            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserMailAddress = :UserMailAddress AND UserStudentId = :UserStudentId");
             // Binding the value returned by the User class for security purposes.
             $this->API->bind(":UserMailAddress", $this->getMailAddress());
+            $this->API->bind(":UserStudentId", $this->getStudentId());
             // Executing the query.
             $this->API->execute();
             // If-statement to verify whether the user does not exist
             if (empty($this->API->resultSet())) {
                 // If-statement to verify the mail of the student
-                if (strpos($this->getMailAddress(), "@student.udm.ac.mu") == true) {
-                    // Assigning 1 as the parameter for the mutator or User.type.
-                    $this->setType(1);
-                    // Assigning the value returned from Generate Password method as the parameter for password's mutator.
-                    $this->setPassword($this->generatePassword());
-                    // Adding the Insert query for the User table.
-                    $this->API->query("INSERT INTO LibrarySystem.User (UserMailAddress, UserPassword, UserStudentId, UserType) VALUES (:UserMailAddress, :UserPassword, :UserStudentId, :UserType)");
-                    // Binding all the required values for security purposes.
-                    $this->API->bind(":UserMailAddress", $this->getMailAddress());
-                    $this->API->bind(":UserPassword", $this->getPassword());
-                    $this->API->bind(":UserStudentId", $this->getStudentId());
-                    $this->API->bind(":UserType", $this->getType());
-                    // Executing the query added on line 90.
-                    $this->API->execute();
-                    // Calling Is SMTP function from PHPMailer.
-                    $this->Mail->IsSMTP();
-                    // Assigning "UTF-8" as the value for the charset.
-                    $this->Mail->CharSet = "UTF-8";
-                    // Assigning the host for gmail's SMTP.
-                    $this->Mail->Host = "ssl://smtp.gmail.com";
-                    // Setting the debug mode to 0.
-                    $this->Mail->SMTPDebug = 0;
-                    // Assigning the Port to 465 as GMail uses 465 as it also means that port 465 has been forwarded for its use.
-                    $this->Mail->Port = 465;
-                    // Securing the SMTP connection by using SSL.
-                    $this->Mail->SMTPSecure = 'ssl';
-                    // Enabling authorization for SMTP.
-                    $this->Mail->SMTPAuth = true;
-                    // Ensuring that PHPMailer is called from a .html file.
-                    $this->Mail->IsHTML(true);
-                    // Sender's mail address.
-                    $this->Mail->Username = "";
-                    // Sender's password
-                    $this->Mail->Password = "";
-                    // Assigning sender as a parameter in the sender's zone.
-                    $this->Mail->setFrom($this->Mail->Username);
-                    // Assinging the receiver mail's address which is retrieved from the User class.
-                    $this->Mail->addAddress($this->getMailAddress());
-                    $this->Mail->subject = "Library System: Notification";
-                    $this->Mail->Body = "Your password is " . $this->getPassword() . ".  Please consider to change your password after logging in!";
-                    // Sending the mail.
-                    $this->Mail->send();
-                    echo "
-                    <h1 id='success'>
-                        You have been registered into the system, you will be redirected to the login page.
-                    </h1>";
-                    // Redirecting the user towards the Login page.
-                    header('refresh:5.8; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+                if (strpos($this->getMailAddress(), '@student.udm.ac.mu') == true) {
+                    // If-statement to verify the student ID of the student
+                    if (substr($this->getStudentId(), 0, 3) === "UDM") {
+                        // Assigning 1 as the parameter for the mutator or User.type.
+                        $this->setType(1);
+                        // Assigning the value returned from Generate Password method as the parameter for password's mutator.
+                        $this->setPassword($this->generatePassword());
+                        // Adding the Insert query for the User table.
+                        $this->API->query("INSERT INTO LibrarySystem.User (UserMailAddress, UserPassword, UserStudentId, UserType) VALUES (:UserMailAddress, :UserPassword, :UserStudentId, :UserType)");
+                        // Binding all the required values for security purposes.
+                        $this->API->bind(":UserMailAddress", $this->getMailAddress());
+                        $this->API->bind(":UserPassword", $this->getPassword());
+                        $this->API->bind(":UserStudentId", $this->getStudentId());
+                        $this->API->bind(":UserType", $this->getType());
+                        // Executing the query added on line 90.
+                        $this->API->execute();
+                        // Calling Is SMTP function from PHPMailer.
+                        $this->Mail->IsSMTP();
+                        // Assigning "UTF-8" as the value for the charset.
+                        $this->Mail->CharSet = "UTF-8";
+                        // Assigning the host for gmail's SMTP.
+                        $this->Mail->Host = "ssl://smtp.gmail.com";
+                        // Setting the debug mode to 0.
+                        $this->Mail->SMTPDebug = 0;
+                        // Assigning the Port to 465 as GMail uses 465 as it also means that port 465 has been forwarded for its use.
+                        $this->Mail->Port = 465;
+                        // Securing the SMTP connection by using SSL.
+                        $this->Mail->SMTPSecure = 'ssl';
+                        // Enabling authorization for SMTP.
+                        $this->Mail->SMTPAuth = true;
+                        // Ensuring that PHPMailer is called from a .html file.
+                        $this->Mail->IsHTML(true);
+                        // Sender's mail address.
+                        $this->Mail->Username = "andygaspard003@gmail.com";
+                        // Sender's password
+                        $this->Mail->Password = "Aegis050200";
+                        // Assigning sender as a parameter in the sender's zone.
+                        $this->Mail->setFrom($this->Mail->Username);
+                        // Assinging the receiver mail's address which is retrieved from the User class.
+                        $this->Mail->addAddress($this->getMailAddress());
+                        $this->Mail->Subject = "Library System: Notification";
+                        $this->Mail->Body = "Your password is " . $this->getPassword() . ".  Please consider to change your password after logging in!";
+                        // Sending the mail.
+                        $this->Mail->send();
+                        echo "
+                        <h1 id='success'>
+                            You have been registered into the system, you will be redirected to the login page.
+                        </h1>";
+                        // Redirecting the user towards the Login page.
+                        header('refresh:5.8; url = http://stormysystem.ddns.net/LibraryManagementSystem/Login');
+                    } else {
+                        echo "
+                        <h1 id='failure'>
+                            You cannot have access to this service as you are not a member of this organization!
+                        </h1>";
+                    } 
                 } else {
                     echo "
                     <h1 id='failure'>
@@ -190,14 +199,14 @@ class User {
                     // Ensuring that PHPMailer is called from a .html file.
                     $this->Mail->IsHTML(true);
                     // Sender's mail address.
-                    $this->Mail->Username = "";
+                    $this->Mail->Username = "andygaspard003@gmail.com";
                     // Sender's password
-                    $this->Mail->Password = "";
+                    $this->Mail->Password = "Aegis050200";
                     // Assigning sender as a parameter in the sender's zone.
                     $this->Mail->setFrom($this->Mail->Username);
                     // Assinging the receiver mail's address which is retrieved from the User class.
                     $this->Mail->addAddress($this->getMailAddress());
-                    $this->Mail->subject = "Library System: Notification";
+                    $this->Mail->Subject = "Library System: Notification";
                     $this->Mail->Body = "Your password is " . $this->getPassword() . ".  Please consider to change your password after logging in!";
                     // Sending the mail.
                     $this->Mail->send();
@@ -290,47 +299,42 @@ class User {
     }
     // Check Session method
     public function checkSession() {
-        // Verifying if, the session ID is the same as the ID of the user and if, it is the case, another switch-statement will verify will check the account type so that the the system will redirect the user to its designated page.
+        // If-statement to verify whether the Session ID is the User's ID
         if ($_SESSION["id"] == $this->getId()) {
-            switch ($this->getType()) {
-                case '0':
-                    echo "
-                    <h1 id='failure'>
-                        You cannot have access to this service as you are currently banned from this service!  A mail will be sent to you!
-                    </h1>";
-                    $this->Mail->IsSMTP();$this->Mail->CharSet = "UTF-8";
-                    $this->Mail->Host = "ssl://smtp.gmail.com";
-                    $this->Mail->SMTPDebug = 0;
-                    $this->Mail->Port = 465;
-                    $this->Mail->SMTPSecure = 'ssl';
-                    $this->Mail->SMTPAuth = true;
-                    $this->Mail->IsHTML(true);$this->Mail->Username = "";
-                    $this->Mail->setFrom($this->Mail->Username);
-                    $this->Mail->addAddress($this->getMailAddress());
-                    $this->Mail->subject = "Library System: Notification";
-                    $this->Mail->Body = "You are currently banned from the system!  Before, you can actually get accessed to the system once again, you will have to get it unban by contacting an administrator.";
-                    $this->Mail->send();
-                    header('refresh:4.4; url=http://stormysystem.ddns.net/LibraryManagementSystem');
-                    break;
-                case '1':
-                    header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member');
-                    break;
-                case '2':
-                    header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member');
-                    break;
-                case '3':
-                    header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member');
-                    break;
-                case '4':
-                    header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin');
-                    break;
-                default:
+            // If-statement to verify the Type of the User
+            if ($this->getType() == 0) {
+                echo "
+                <h1 id='failure'>
+                    You cannot have access to this service as you are currently banned from this service!  A mail will be sent to you!
+                </h1>";
+                $this->Mail->IsSMTP();$this->Mail->CharSet = "UTF-8";
+                $this->Mail->Host = "ssl://smtp.gmail.com";
+                $this->Mail->SMTPDebug = 0;
+                $this->Mail->Port = 465;
+                $this->Mail->SMTPSecure = 'ssl';
+                $this->Mail->SMTPAuth = true;
+                $this->Mail->IsHTML(true);$this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Password = "Aegis050200";
+                $this->Mail->setFrom($this->Mail->Username);
+                $this->Mail->addAddress($this->getMailAddress());
+                $this->Mail->Subject = "Library System: Notification";
+                $this->Mail->Body = "You are currently banned from the system!  Before, you can actually get accessed to the system once again, you will have to get it unban by contacting an administrator.";
+                $this->Mail->send();
+                header('refresh:4.4; url=http://stormysystem.ddns.net/LibraryManagementSystem');
+            } else if ($this->getType() == 1) {
+                header('Location: ../Member');
+            } else if ($this->getType() == 2) {
+                header('Location: ../Member');
+            } else if ($this->getType() == 3) {
+                header('Location: ../Member');
+            } else if ($this->getType() == 4) {
+                header('Location: ../Admin');
+            } else {
                 echo"
                 <h1 id='failure'>
-                    You cannot have access to this service as you are not a member of this organization!
+                    There is a problem with the system!  The page will refresh to fix the issue.
                 </h1>";
-                    header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem');
-                    break;
+                header('refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Login');
             }
         } else {
             echo "
@@ -375,11 +379,11 @@ class User {
             $this->Mail->SMTPSecure = 'ssl';
             $this->Mail->SMTPAuth = true;
             $this->Mail->IsHTML(true);
-            $this->Mail->Username = "";
-            $this->Mail->Password = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
+            $this->Mail->Password = "Aegis050200";
             $this->Mail->setFrom($this->Mail->Username);
             $this->Mail->addAddress($this->getMailAddress());
-            $this->Mail->subject = "Library System: Notification";
+            $this->Mail->Subject = "Library System: Notification";
             $this->Mail->Body = "Your password has been resetted.  Your new password is " . $this->getPassword() . ".";
             $this->Mail->send();
             echo "
@@ -391,16 +395,26 @@ class User {
     }
     // Change Password method
     public function changePassword() {
+        // Preparing the query
         $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+        // Binding the value for security purpose
         $this->API->bind(":UserId", $this->getId());
+        // Executing the query
         $this->API->execute();
+        // If-statement to verify whether the data entered corresponds to the data in the database.
         if ($_POST['oldPassword'] == $this->API->resultSet()[0]['UserPassword']) {
+            // If-statement to verify whether the data entered once is equal to the second data.
             if ($_POST['newPassword'] == $_POST['confirmNewPassword']) {
+                // Assigning the value returned from the html form as the parameter for User.setPassword()
                 $this->setPassword($_POST['newPassword']);
+                // Preparing the query
                 $this->API->query("UPDATE User SET UserPassword = :UserPassword WHERE UserId = :UserId");
+                // Binding the values for security purposes
                 $this->API->bind(":UserId", $this->getId());
                 $this->API->bind(":UserPassword", $this->getPassword());
-                $this->API->execute();$this->Mail->IsSMTP();
+                // Executing the query
+                $this->API->execute();
+                $this->Mail->IsSMTP();
                 $this->Mail->CharSet = "UTF-8";
                 $this->Mail->Host = "ssl://smtp.gmail.com";
                 $this->Mail->SMTPDebug = 0;
@@ -408,11 +422,11 @@ class User {
                 $this->Mail->SMTPSecure = 'ssl';
                 $this->Mail->SMTPAuth = true;
                 $this->Mail->IsHTML(true);
-                $this->Mail->Username = "";
-                $this->Mail->Password = "";
+                $this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Password = "Aegis050200";
                 $this->Mail->setFrom($this->Mail->Username);
                 $this->Mail->addAddress($this->getMailAddress());
-                $this->Mail->subject = "Library System: Notification";
+                $this->Mail->Subject = "Library System: Notification";
                 $this->Mail->Body = "Your password has been changed.  Your new password is " . $this->getPassword() . ".  If, you are not the one, please consider to reset your password on this link http://stormysystem.ddns.net/LibraryManagementSystem/Reset_Password";
                 $this->Mail->send();
                 echo "
@@ -461,18 +475,19 @@ class User {
     }
     // Freeze Membership method
     public function freezeMembership() {
+        // Storing the value returned from the cookie in a local variable
+        $userId = $_COOKIE["id"];
         // Preparing the query for banning the member in question by changing its account type.
-        $this->API->query("UPDATE LibrarySystem.User SET UserType = 0 WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-        // Binding the values for security purposes.
-        $this->API->bind(":UserId", $_GET['search']);
-        $this->API->bind(":UserMailAddress", $_GET['search']);
-        $this->API->bind(":UserStudentId", $_GET['search']);
+        $this->API->query("UPDATE LibrarySystem.User SET UserType = 0 WHERE UserId = :UserId");
+        // Binding the value for security purposes.
+        $this->API->bind(":UserId", $userId);
         // Executing the Update query.
         $this->API->execute();
         // Retrieving data from the database to send a mail to the banned user.
         $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
         // Binding the value for the security purposes.
-        $this->API->bind(":UserId", $_GET['search']);
+        $this->API->bind(":UserId", $userId);
+        // Executing the query.
         $this->API->execute();
         // Calling Is SMTP function from PHPMailer.
         $this->Mail->IsSMTP();
@@ -491,14 +506,14 @@ class User {
         // Ensuring that PHPMailer is called from a .html file.
         $this->Mail->IsHTML(true);
         // Sender's mail address.
-        $this->Mail->Username = "";
+        $this->Mail->Username = "andygaspard003@gmail.com";
         // Sender's password
-        $this->Mail->Password = "";
+        $this->Mail->Password = "Aegis050200";
         // Assigning sender as a parameter in the sender's zone.
         $this->Mail->setFrom($this->Mail->Username);
         // Assinging the receiver mail's address which is retrieved from the User class.
         $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
-        $this->Mail->subject = "Library System: Notification";
+        $this->Mail->Subject = "Library System: Notification";
         $this->Mail->Body = "Your account has been banned!  In order to get it unban please contact an administrator to find out the causes and what should be done for you to get access back into the system.";
         // Sending the mail.
         $this->Mail->send();
@@ -507,31 +522,31 @@ class User {
         <h1 id='success'>
             {$this->API->resultSet()[0]['UserMailAddress']} has been banned and a mail has also been sent to him.
         </h1>";
+        header("refresh: 2.6; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
     }
     // Unfreeze Membership method
     public function unfreezeMembership() {
+        // Storing the value returned from the cookie in a local variable.
+        $userId = $_COOKIE["id"];
         // Preparing the query to return fields from the value entered entered are already in the database.
-        $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-        // Binding the values returned by the User class for security purposes.
-        $this->API->bind(":UserId", $_GET["search"]);
-        $this->API->bind(":UserMailAddress", $_GET["search"]);
-        $this->API->bind(":UserStudentId", $_GET["search"]);
+        $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+        // Binding the value for security purposes.
+        $this->API->bind(":UserId", $userId);
         // Executing the query.
         $this->API->execute();
         // Verifying the mail address of the banned user.
         if (strpos($this->API->resultSet()[0]['UserMailAddress'], "@student.udm.ac.mu")) {
             // Preparing the query for banning the member in question by changing its account type.
-            $this->API->query("UPDATE LibrarySystem.User SET UserType = 1 WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-            // Binding the values returned by the User class for security purposes.
-            $this->API->bind(":UserId", $_GET["search"]);
-            $this->API->bind(":UserMailAddress", $_GET["search"]);
-            $this->API->bind(":UserStudentId", $_GET["search"]);
+            $this->API->query("UPDATE LibrarySystem.User SET UserType = 1 WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
             // Executing the Update query.
             $this->API->execute();
             // Retrieving data from the database to send a mail to the banned user.
             $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
             // Binding the value for the security purposes.
-            $this->API->bind(":UserId", $_GET['search']);
+            $this->API->bind(":UserId", $userId);
+            // Executing the query
             $this->API->execute();
             // Calling Is SMTP function from PHPMailer.
             $this->Mail->IsSMTP();
@@ -550,14 +565,14 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
             $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
-            $this->Mail->subject = "Library System: Notification";
+            $this->Mail->Subject = "Library System: Notification";
             $this->Mail->Body = "Your account has been unbanned!  You can now have access back into the system.  Welcome back, it is nice to have you back in the system!";
             // Sending the mail.
             $this->Mail->send();
@@ -566,19 +581,19 @@ class User {
             <h1 id='success'>
                 {$this->API->resultSet()[0]['UserMailAddress']} has been unbanned and a mail has also been sent to him.
             </h1>";
+            header("refresh: 3.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
         } else if (strpos($this->API->resultSet()[0]['UserMailAddress'], "@udm.ac.mu")) {
             // Preparing the query for banning the member in question by changing its account type.
-            $this->API->query("UPDATE LibrarySystem.User SET UserType = 2 WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-            // Binding the values returned by the User class for security purposes.
-            $this->API->bind(":UserId", $_GET["search"]);
-            $this->API->bind(":UserMailAddress", $_GET["search"]);
-            $this->API->bind(":UserStudentId", $_GET["search"]);
+            $this->API->query("UPDATE LibrarySystem.User SET UserType = 2 WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
             // Executing the Update query.
             $this->API->execute();
             // Retrieving data from the database to send a mail to the banned user.
             $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
             // Binding the value for the security purposes.
-            $this->API->bind(":UserId", $_GET['search']);
+            $this->API->bind(":UserId", $userId);
+            // Executing the query
             $this->API->execute();
             // Calling Is SMTP function from PHPMailer.
             $this->Mail->IsSMTP();
@@ -597,14 +612,14 @@ class User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
             $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
-            $this->Mail->subject = "Library System: Notification";
+            $this->Mail->Subject = "Library System: Notification";
             $this->Mail->Body = "Your account has been unbanned!  You can now have access back into the system.  Welcome back, it is nice to have you back in the system! However, if you are a member of the academical staff you should consider into contacting an administrator to change your account type back just in case";
             // Sending the mail.
             $this->Mail->send();
@@ -613,11 +628,13 @@ class User {
             <h1 id='success'>
                 {$this->API->resultSet()[0]['UserMailAddress']} has been unbanned and a mail has also been sent to him.
             </h1>";
+            header("refresh: 3.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
         } else {
             echo "
             <h1 id='failure'>
                 This is not a member of this organization!
             </h1>";
+            header("refresh: 3.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
         }
     }
     // Profile Checker method
@@ -711,53 +728,12 @@ class User {
         $this->API->bind(":UserStudentId", $_GET["search"]);
         // Executing the query.
         $this->API->execute();
-        // If-statement that will verify that the value entered is in the database or not.
+        // If-statement that will verify that the value entered is not in the database.
         if (empty($this->API->resultSet())) {
             echo "<h1 id='failure'>{$_GET['search']} does not exist!</h1>";
         } else {
             // Storing the value of the amount found.
             $amountFound = count($this->API->resultSet());
-            // Storing html forms that will be used depending on the conditions.
-            $studentBanningOptions = "
-            <div id='ban'>
-                <form method='post'>
-                    <input type='submit' value='Ban' id='banButton' name='ban' />
-                </form>
-            </div>
-            ";
-            $studentUnbanningOptions = "
-            <div id='unban'>
-                <form method='post'>
-                    <input type='submit' value='Unban' id='unbanButton' name='unban' />
-                </form>
-            </div>
-            ";
-            $staffBanningOptions = "
-            <div id='options'>
-                <div id='ban'>
-                    <form method='post'>
-                        <input type='submit' value='Ban' name='ban' id='banButton' />
-                    </form>
-                </div>
-                <div id='promote'>
-                    <form method='post'>
-                        <input type='submit' value='Promote' name='promote' id='promoteButton' />
-                    </form>
-                </div>
-            </div>";
-            $staffUnbanningOptions = "
-            <div id='options'>
-                <div id='unban'>
-                    <form method='post'>
-                        <input type='submit' value='Unban' name='unban' id='unbanButton' />
-                    </form>
-                </div>
-                <div id='promote'>
-                    <form method='post'>
-                        <input type='submit' value='Promote' name='promote' id='promoteButton' />
-                    </form>
-                </div>
-            </div>";
             // Displaying the amount of results found.
             echo "
             <div id='amountFound'>
@@ -785,7 +761,7 @@ class User {
                 }
                 if ($result['UserProfilePicture'] != null) {
                     if (!empty($result['UserStudentId'])) {
-                        $pp = "http://stormysystem.ddns.net" . $this->getProfilePicture();
+                        $pp = "http://stormysystem.ddns.net" . $result['UserProfilePicture'];
                         if ($result['UserType'] == 0) {
                             echo "
                             <div id='found'>
@@ -833,7 +809,11 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <img src='{$pp}' />
                                     </div>
-                                    {$studentUnbanningOptions}
+                                    <div id='unban'>
+                                        <form method='post'>
+                                            <input type='submit' value='Unban' id='unbanButton' name='unban' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                        </form>
+                                    </div>
                                 </div>
                             </div>";
                         } else if ($result['UserType'] == 1) {
@@ -883,12 +863,16 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <img src='{$pp}' />
                                     </div>
-                                    {$studentBanningOptions}
+                                    <div id='ban'>
+                                        <form method='post'>
+                                            <input type='submit' value='Ban' id='banButton' name='ban' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                        </form>
+                                    </div>
                                 </div>
                             </div>";
                         }
                     } else {
-                        $pp = "http://stormysystem.ddns.net" . $this->getProfilePicture();
+                        $pp = "http://stormysystem.ddns.net" . $result['UserProfilePicture'];
                         if ($result['UserType'] == 0) {
                             echo "
                             <div id='found'>
@@ -928,7 +912,18 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <img src='{$pp}' />
                                     </div>
-                                    {$staffUnbanningOptions}
+                                    <div id='options'>
+                                        <div id='unban'>
+                                            <form method='post'>
+                                                <input type='submit' value='Unban' name='unban' id='unbanButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                        <div id='promote'>
+                                            <form method='post'>
+                                                <input type='submit' value='Promote' name='promote' id='promoteButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>";
                         } else if ($result['UserType'] == 2 || $result['UserType'] == 3) {
@@ -970,7 +965,18 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <img src='{$pp}' />
                                     </div>
-                                    {$staffBanningOptions}
+                                    <div id='options'>
+                                        <div id='ban'>
+                                            <form method='post'>
+                                                <input type='submit' value='Ban' name='ban' id='banButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                        <div id='promote'>
+                                            <form method='post'>
+                                                <input type='submit' value='Promote' name='promote' id='promoteButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>";
                         } else if($result['UserType'] == 4) {
@@ -1062,7 +1068,9 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <i class='fa fa-user faProfile'></i>
                                     </div>
-                                    {$studentUnbanningOptions}
+                                    <form method='post'>
+                                        <input type='submit' value='Unban' id='unbanButton' name='unban' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                    </form>
                                 </div>
                             </div>";
                         } else if ($result['UserType'] == 1) {
@@ -1112,7 +1120,9 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <i class='fa fa-user faProfile'></i>
                                     </div>
-                                    {$studentBanningOptions}
+                                    <form method='post'>
+                                        <input type='submit' value='Ban' id='banButton' name='ban' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                    </form>
                                 </div>
                             </div>";
                         }
@@ -1156,7 +1166,18 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <i class='fa fa-user faProfile'></i>
                                     </div>
-                                    {$staffUnbanningOptions}
+                                    <div id='options'>
+                                        <div id='unban'>
+                                            <form method='post'>
+                                                <input type='submit' value='Unban' name='unban' id='unbanButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                        <div id='promote'>
+                                            <form method='post'>
+                                                <input type='submit' value='Promote' name='promote' id='promoteButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>";
                         } else if ($result['UserType'] == 2 || $result['UserType'] == 3) {
@@ -1198,7 +1219,18 @@ class User {
                                     <div id='UserProfilePicture'>
                                         <i class='fa fa-user faProfile'></i>
                                     </div>
-                                    {$staffBanningOptions}
+                                    <div id='options'>
+                                        <div id='ban'>
+                                            <form method='post'>
+                                                <input type='submit' value='Ban' name='ban' id='banButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                        <div id='promote'>
+                                            <form method='post'>
+                                                <input type='submit' value='Promote' name='promote' id='promoteButton' class='{$result['UserId']}' onClick='requestServerAttention(this.className)' />
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>";
                         } else if ($result['UserType'] == 4) {
@@ -1247,33 +1279,109 @@ class User {
     }
     // Promote method
     public function promote() {
+        // Storing the value returned from the cookie in a local variable
+        $userId = $_COOKIE["id"];
         // Preparing the query to return fields from the value entered entered are already in the database.
-        $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-        // Binding the values returned by the User class for security purposes.
-        $this->API->bind(":UserId", $_GET["search"]);
-        $this->API->bind(":UserMailAddress", $_GET["search"]);
-        $this->API->bind(":UserStudentId", $_GET["search"]);
+        $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+        // Binding the value for security purposes.
+        $this->API->bind(":UserId", $userId);
         // Executing the query.
         $this->API->execute();
         // Verifying the user type before changing its type.
         if ($this->API->resultSet()[0]['UserType'] == 2) {
             // Preparing the query for banning the member in question by changing its account type.
-            $this->API->query("UPDATE LibrarySystem.User SET UserType = 3 WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-            // Binding the values for security purposes.
-            $this->API->bind(":UserId", $_GET['search']);
-            $this->API->bind(":UserMailAddress", $_GET['search']);
-            $this->API->bind(":UserStudentId", $_GET['search']);
+            $this->API->query("UPDATE LibrarySystem.User SET UserType = 3 WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
             // Executing the Update query.
             $this->API->execute();
+            // Preparing the query
+            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
+            // Executing the query
+            $this->API->execute();
+            // Calling Is SMTP function from PHPMailer.
+            $this->Mail->IsSMTP();
+            // Assigning "UTF-8" as the value for the charset.
+            $this->Mail->CharSet = "UTF-8";
+            // Assigning the host for gmail's SMTP.
+            $this->Mail->Host = "ssl://smtp.gmail.com";
+            // Setting the debug mode to 0.
+            $this->Mail->SMTPDebug = 0;
+            // Assigning the Port to 465 as GMail uses 465 as it also means that port 465 has been forwarded for its use.
+            $this->Mail->Port = 465;
+            // Securing the SMTP connection by using SSL.
+            $this->Mail->SMTPSecure = 'ssl';
+            // Enabling authorization for SMTP.
+            $this->Mail->SMTPAuth = true;
+            // Ensuring that PHPMailer is called from a .html file.
+            $this->Mail->IsHTML(true);
+            // Sender's mail address.
+            $this->Mail->Username = "andygaspard003@gmail.com";
+            // Sender's password
+            $this->Mail->Password = "Aegis050200";
+            // Assigning sender as a parameter in the sender's zone.
+            $this->Mail->setFrom($this->Mail->Username);
+            // Assinging the receiver mail's address which is retrieved from the User class.
+            $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
+            $this->Mail->Subject = "Library System: Notification";
+            $this->Mail->Body = "Your account type has been set as an 'academical staff'.  If, you are not a member of the academical staff, please contact an administrator.";
+            // Sending the mail.
+            $this->Mail->send();
+            // Message that will be displayed to the administrator.
+            echo "
+            <h1 id='success'>
+                {$this->API->resultSet()[0]['UserMailAddress']} has been promoted and a mail has also been sent to him.
+            </h1>";
+            header("refresh: 5.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
         } else if ($this->API->resultSet()[0]['UserType'] == 3) {
             // Preparing the query for banning the member in question by changing its account type.
-            $this->API->query("UPDATE LibrarySystem.User SET UserType = 2 WHERE UserId = :UserId OR UserMailAddress = :UserMailAddress OR UserStudentId = :UserStudentId");
-            // Binding the values for security purposes.
-            $this->API->bind(":UserId", $_GET['search']);
-            $this->API->bind(":UserMailAddress", $_GET['search']);
-            $this->API->bind(":UserStudentId", $_GET['search']);
+            $this->API->query("UPDATE LibrarySystem.User SET UserType = 2 WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
             // Executing the Update query.
             $this->API->execute();
+            // Preparing the query
+            $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+            // Binding the value for security purposes.
+            $this->API->bind(":UserId", $userId);
+            // Executing the query
+            $this->API->execute();
+            // Calling Is SMTP function from PHPMailer.
+            $this->Mail->IsSMTP();
+            // Assigning "UTF-8" as the value for the charset.
+            $this->Mail->CharSet = "UTF-8";
+            // Assigning the host for gmail's SMTP.
+            $this->Mail->Host = "ssl://smtp.gmail.com";
+            // Setting the debug mode to 0.
+            $this->Mail->SMTPDebug = 0;
+            // Assigning the Port to 465 as GMail uses 465 as it also means that port 465 has been forwarded for its use.
+            $this->Mail->Port = 465;
+            // Securing the SMTP connection by using SSL.
+            $this->Mail->SMTPSecure = 'ssl';
+            // Enabling authorization for SMTP.
+            $this->Mail->SMTPAuth = true;
+            // Ensuring that PHPMailer is called from a .html file.
+            $this->Mail->IsHTML(true);
+            // Sender's mail address.
+            $this->Mail->Username = "andygaspard003@gmail.com";
+            // Sender's password
+            $this->Mail->Password = "Aegis050200";
+            // Assigning sender as a parameter in the sender's zone.
+            $this->Mail->setFrom($this->Mail->Username);
+            // Assinging the receiver mail's address which is retrieved from the User class.
+            $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
+            $this->Mail->Subject = "Library System: Notification";
+            $this->Mail->Body = "Your account type has been set as an 'non-academical staff'.  If, you are not a member of the academical staff, please contact an administrator.";
+            // Sending the mail.
+            $this->Mail->send();
+            // Message that will be displayed to the administrator.
+            echo "
+            <h1 id='success'>
+                {$this->API->resultSet()[0]['UserMailAddress']} has been promoted and a mail has also been sent to him.
+            </h1>";
+            header("refresh: 5.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/User_Management/");
         }
     }
     // Register Type Checker method
