@@ -32,25 +32,25 @@ ob_start();
                 <div id="notice">
                     To register in this system, you should fill this form properly.  Click on the button that correspond to your role in the organization to fill the corresponding form.
                 </div>
-                    <div id="formButtons">
-                        <div id="student">
-                            <button id="studentFormButton" onClick="showForm(this.id)">
-                                Student
-                            </button>
-                        </div>
-                        <div id="staff">
-                            <button id="staffFormButton" onClick="showForm(this.id)">
-                                Staff
-                            </button>
-                        </div>
+                <div id="formButtons">
+                    <div id="student">
+                        <button id="studentFormButton" onClick="showForm(this.id)">
+                            Student
+                        </button>
                     </div>
+                    <div id="staff">
+                        <button id="staffFormButton" onClick="showForm(this.id)">
+                            Staff
+                        </button>
+                    </div>
+                </div>
                 <div id="studentRegistrationForm">
                     <form method="post">
                         <input type="email" name="mailAddress" id="mailAddress" placeholder="Mail Address" required />
                         <div id="mailAddressNotice">
                             You need to use your UDM Mail to register into this system.
                         </div>
-                        <input type="text" name="studentId" id="studentId" placeholder="Student ID" />
+                        <input type="text" name="studentId" id="studentId" placeholder="Student ID" required />
                         <div id="studentIdNotice">
                             You need to use either your NTA bus pass or your UDM Student ID to register into the system.
                         </div>
