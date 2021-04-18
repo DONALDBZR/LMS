@@ -25,7 +25,15 @@ $User = new User();
         <div id="right">
             <div id="resetPasswordMessage"></div>
             <div id="resetPasswordNotice"></div>
-            <div id="form"></div>
+            <div id="resetPasswordForm">
+                <form method="post">
+                    <input type="email" name="mailAddress" id="mailAddress" placeholder="Mail Address" required />
+                    <div id="mailAddressNotice">
+                        You need to use your UDM Mail to reset your password.
+                    </div>
+                    <input type="submit" value="Reset" id="resetPasswordButton" name="resetPassword" />
+                </form>
+            </div>
             <?php
             // Calling Reset Password function from User class if the Reset Password button is pressed.
             if (isset($_POST['resetPassword'])) {
