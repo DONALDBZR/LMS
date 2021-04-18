@@ -77,7 +77,19 @@ $User = new User();
                     <div id="typeGuide"></div>
                 </div>
             </div>
-            <div id="password"></div>
+            <div id="password">
+                <h1 id="contents">
+                    Password: 
+                </h1>
+                <div id="contents">
+                    <input type="password" name="oldPassword" id="oldPassword" placeholder="Password" required />
+                    <input type="password" name="newPassword" id="newPassword" placeholder="New Password" required />
+                    <input type="password" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm New Password" required />
+                    <div id="passwordNotice">
+                        It allows you to actually get access into the system.
+                    </div>
+                </div>
+            </div>
             <div id="profilePicture">
                 <div id="profilePictureHeader"></div>
                 <div id="contents">
