@@ -229,11 +229,13 @@ class Book {
             <h1 id='failure'>
                 The book cannot be removed due to error!  Error: {$this->API->errorInfo()}
             </h1>";
+            header("refresh: 1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Book_Management");
         } else {
             echo "
             <h1 id='success'>
                 Book has been removed from the system!
             </h1>";
+            header("refresh: 1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Book_Management");
         }
     }
     // Add Book method
@@ -282,6 +284,7 @@ class Book {
             <h1 id='success'>
                 {$this->getTitle()} has been added!
             </h1>";
+            header("refresh: 3.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Book_Management");
         }
     }
     // Update Book method
@@ -302,19 +305,14 @@ class Book {
         $this->setBookLocation($_POST['inputUpdateBookLocation']);
         // Storing Post's Update State value to be verified.
         $postState = $_POST['inputUpdateState'];
-        switch ($postState) {
-            case "Damaged":
-                $state = 0;
-                break;
-            case "Not-Damaged":
-                $state = 1;
-                break;
-            default:
-                $state = $this->getState();
-                break;
+        // If-statement to verify the value of Post State
+        if ($postState == "damaged") {
+            $this->setState(0);
+        } else if ($postState == "not-damaged") {
+            $this->setState(1);
+        } else {
+            $this->setState($this->getState());
         }
-        // Assigning the processed State value as State's mutator.
-        $this->setState($state);
         // Preparing query
         $this->API->query("UPDATE LibrarySystem.Book SET BookStock = :BookStock, BookAuthor = :BookAuthor, BookTitle = :BookTitle, BookPublisher = :BookPublisher, BookBookLocation = :BookBookLocation, BookState = :BookState, BookCategory = :BookCategory WHERE BookIsbn = :BookIsbn");
         // Binding all the values for security purposes.
@@ -334,6 +332,7 @@ class Book {
         <h1 id='success'>
             {$this->getTitle()} has been updated!
         </h1>";
+        header("refresh: 2.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Book_Management");
     }
     // Admin Search method
     public function adminSearch() {
@@ -453,7 +452,8 @@ class Book {
                             </div>
                         </div>
                     </div>
-                </div>";
+                </div>
+                ";
             }
         }
     }
