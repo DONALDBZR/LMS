@@ -119,27 +119,27 @@ class Reservation {
                     <h1 id='success'>
                         {$this->Book->getTitle()} has been reserved!  You will be redirected to the page where you can see all your reservations.
                     </h1>";
-                    header("refresh:4.4; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Books");
+                    header("refresh:2.45; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Books");
                 } else {
                     echo "
                     <h1 id='failure'>
                         There is a problem with the system.  You will be redirected to the Member's portal but please report the issue to an administrator.
                     </h1>";
-                    header("refresh:4.6; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+                    header("refresh:2.45; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
                 }
             } else {
                 echo "
                 <h1 id='failure'>
                     There is either a problem with your account or with the system.  You will be logged out but you can reconnect into the system and can also report the problem to an administrator!
                 </h1>";
-                header("refresh:4.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
+                header("refresh:2.45; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
             }
         } else {
             echo "
             <h1 id='failure'>
                 You cannot make more reservations.  You can either wait for your reservations to be available to be collected or you can also cancel the reservations.  Hence, you will be redirected to the page where you can see all your reservations.
             </h1>";
-            header("refresh:5.0; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Books");
+            header("refresh:2.45; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Books");
         }
     }
     // Cancel Reservation method
@@ -152,11 +152,8 @@ class Reservation {
         $this->API->bind(":ReservationId", $this->getId());
         // Executing the query
         $this->API->execute();
-        echo "
-        <h1 id='success'>
-            The reservation has been cancelled!
-        </h1>";
-        header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Reserved_Book");
+        // Refreshing the page
+        header("Location: ./");
     }
     // View Reserved Book method
     public function viewReservedBook() {
