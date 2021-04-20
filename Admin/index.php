@@ -40,7 +40,33 @@ ob_start();
     <h1 id="notice">
         Other functionalities are in the profile page
     </h1>
-    <div id="adminForms"></div>
+    <div id="adminForms">
+        <div id="report">
+            <h1>
+                To generate and send the report for the management, click on the report button below.
+            </h1>
+            <form method="post">
+                <div id="reportButton">
+                    <input type="submit" value="Report" name="generateReport" />
+                </div>
+            </form>
+        </div>
+        <div id="mail">
+            <h1>
+                Mail Form
+            </h1>
+            <p>
+                Please fill in this form to send a mail reminder.
+            </p>
+            <form method="post">
+                <input type="email" name="mail" id="mailInput" placeholder="E-Mail" required />
+                <input type="text" name="message" id="mailMessage" placeholder="Message" required />
+                <div id="sendMailButton">
+                    <input type="submit" value="Send" id="sendMail" name="sendMailReminder" />
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="response">
         <?php
         // If-statement to verify whether the Generate Report button is pressed

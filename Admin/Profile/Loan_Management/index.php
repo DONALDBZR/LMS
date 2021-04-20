@@ -52,7 +52,27 @@ ob_start();
         <p>
             In order to manage the loans, you will need to search for the loan that was recorded in the system.
         </p>
-        <div id="searchBar"></div>
+        <div id="searchBar">
+            <form method="get">
+                <div id="personBook">
+                    <div id="person">
+                        <h1 id="contents">
+                            User's Mail:
+                        </h1>
+                        <input type="email" name="person" id="searchPerson" placeholder="User's Mail" required />
+                    </div>
+                    <div id="book">
+                        <h1 id="contents">
+                            Book's Title:
+                        </h1>
+                        <input type="text" name="book" id="searchBook" placeholder="Book's Title" required />
+                    </div>
+                </div>
+                <div id="search">
+                    <input type="submit" name="search" value="Search" id="searchButton" />
+                </div>
+            </form>
+        </div>
         <div id="searchResults">
             <?php
             // If-statement to verify whether the search button is pressed.
