@@ -353,9 +353,9 @@ class Loan {
                 // Ensuring that PHPMailer is called from a .html file.
                 $this->Mail->IsHTML(true);
                 // Sender's mail address.
-                $this->Mail->Username = "";
+                $this->Mail->Username = "andygaspard003@gmail.com";
                 // Sender's password
-                $this->Mail->Password = "";
+                $this->Mail->Password = "Aegis050200";
                 // Assigning sender as a parameter in the sender's zone.
                 $this->Mail->setFrom($this->Mail->Username);
                 // Assinging the receiver mail's address which is retrieved from the User class.
@@ -533,13 +533,14 @@ class Loan {
                     <h2 id='success'>
                         The book has been returned
                     </h2>";
-                    header("refresh:2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
+                    // Calling Check method
+                    $this->check();
                 } else {
                     echo "
                     <h2 id='failure'>
                         There is an issue with the system!  The page will refresh to fix the issue...
                     </h2>";
-                    header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
+                    header("refresh:2.53; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
                 }
             } else {
                 // Converting the value returned from API.resultSet()[0]['LoanDueDate']
@@ -599,12 +600,14 @@ class Loan {
                         <h2 id='success'>
                             The book has been returned and the fine has been paid!
                         </h2>";
+                        // Calling Check method
+                        $this->check();
                     } else {
                         echo "
                         <h2 id='failure'>
                             There is an issue with the system!  The page will refresh to fix the issue...
                         </h2>";
-                        header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
+                        header("refresh:2.53; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
                     }
                 }
             }
@@ -613,7 +616,7 @@ class Loan {
             <h2 id='failure'>
                 There is an issue with the system!  The page will refresh to fix the issue...
             </h2>";
-            header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
+            header("refresh:2.53; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
         }
     }
     // Search method
@@ -736,6 +739,119 @@ class Loan {
             <h1 id='failure'>
                 This user does not exist!
             </h1>";
+        }
+    }
+    // Check method
+    public function check() {
+        // Assigning the value returned by Loan::getBook() as the parameter for Reservation::setBook()
+        $this->Reservation->setBook($this->getBook());
+        // Preparing the query
+        $this->API->query("SELECT * FROM LibrarySystem.Reservation WHERE ReservationBook = :ReservationBook");
+        // Binding all the values for security purposes
+        $this->API->bind(":ReservationBook", $this->Reservation->getBook());
+        // Executing the query
+        $this->API->execute();
+        // If-statement to verify whether the data exists
+        if (!empty($this->API->resultSet())) {
+            // Retrieving data from the database
+            // Assigning the data from API::resultSet as the parameter for Reservation::setPerson()
+            $this->Reservation->setPerson($this->API->resultSet()[0]['ReservationPerson']);
+            // Assigning the data from API::resultSet as the parameter for Reservation::setBook()
+            $this->Reservation->setBook($this->API->resultSet()[0]['ReservationBook']);
+            // Assigning 1 as the parameter for Reservation::setBorrowed()
+            $this->Reservation->setBorrowed(1);
+            // Assigning the value returned from Reservation::getPerson() as the parameter for Loan::setPerson()
+            $this->setPerson($this->Reservation->getPerson());
+            // Assigning the value returned from Reservation::getBook() as the parameter for Loan::setBook()
+            $this->setBook($this->Reservation->getBook());
+            // Calling Set Time method
+            $this->setTime();
+            // Calling Set Date method
+            $this->setDate();
+            // Calling Set Due Date method
+            $this->setDueDate();
+            // Assigning 0 as the parameter for the mutator of Loan.overdue
+            $this->setOverdue(0);
+            // Assigning 0 as the parameter for the mutator of Loan.returned
+            $this->setReturned(0);
+            // Removing 1 book copy
+            $newStock = $this->Book->getStock() - 1;
+            // Assigning New Stock as the parameter of the mutator of Book.stock
+            $this->Book->setStock($newStock);
+            // Preparing the query to update the data in the database.
+            $this->API->query("UPDATE LibrarySystem.Book SET BookStock = :BookStock WHERE BookIsbn = :BookIsbn");
+            // Binding the values for security purposes
+            $this->API->bind(":BookStock", $this->Book->getStock());
+            $this->API->bind(":BookIsbn", $this->Book->getIsbn());
+            // Executing the query
+            $this->API->execute();
+            // Preparing the query for inserting the data in the database
+            $this->API->query("INSERT INTO LibrarySystem.Loan (LoanTime, LoanDate, LoanDueDate, LoanOverdue, LoanPerson, LoanBook, LoanReturned) VALUES (:LoanTime, :LoanDate, :LoanDueDate, :LoanOverdue, :LoanPerson, :LoanBook, :LoanReturned)");
+            // Binding all the values for security purposes
+            $this->API->bind(":LoanTime", $this->getTime());
+            $this->API->bind(":LoanDate", $this->getDate());
+            $this->API->bind(":LoanDueDate", $this->getDueDate());
+            $this->API->bind(":LoanOverdue", $this->getOverdue());
+            $this->API->bind(":LoanPerson", $this->getPerson());
+            $this->API->bind(":LoanBook", $this->getBook());
+            $this->API->bind(":LoanReturned", $this->getReturned());
+            // Executing the query
+            $this->API->execute();
+            // Preparing the query to retrieve data from the database
+            $this->API->query("SELECT * FROM LibrarySystem.Loan WHERE LoanPerson = :LoanPerson AND LoanBook = :LoanBook");
+            // Binding all the value for security purposes
+            $this->API->bind(":LoanPerson", $this->getPerson());
+            $this->API->bind(":LoanBook", $this->getBook());
+            // Executing the query
+            $this->API->execute();
+            // If-statement to verify whether the data exists
+            if (!empty($this->API->resultSet())) {
+                // Preparing the query
+                $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookIsbn = :BookIsbn");
+                // Binding the value for security purposes
+                $this->API->bind(":BookIsbn", $this->getBook());
+                // Executing the query
+                $this->API->execute();
+                // Assigning the value returned from API::resultSet() as the parameter for Book::setTitle()
+                $this->Book->setTitle($this->API->resultSet()[0]['BookTitle']);
+                // Preparing the query 
+                $this->API->query("SELECT * FROM LibrarySystem.User WHERE UserId = :UserId");
+                // Binding the value for security purposes
+                $this->API->bind(":UserId", $this->getPerson());
+                // Executing the query
+                $this->API->execute();
+                // Calling Is SMTP function from PHPMailer.
+                $this->Mail->IsSMTP();
+                // Assigning "UTF-8" as the value for the charset.
+                $this->Mail->CharSet = "UTF-8";
+                // Assigning the host for gmail's SMTP.
+                $this->Mail->Host = "ssl://smtp.gmail.com";
+                // Setting the debug mode to 0.
+                $this->Mail->SMTPDebug = 0;
+                // Assigning the Port to 465 as GMail uses 465 as it also means that port 465 has been forwarded for its use.
+                $this->Mail->Port = 465;
+                // Securing the SMTP connection by using SSL.
+                $this->Mail->SMTPSecure = 'ssl';
+                // Enabling authorization for SMTP.
+                $this->Mail->SMTPAuth = true;
+                // Ensuring that PHPMailer is called from a .html file.
+                $this->Mail->IsHTML(true);
+                // Sender's mail address.
+                $this->Mail->Username = "andygaspard003@gmail.com";
+                // Sender's password
+                $this->Mail->Password = "Aegis050200";
+                // Assigning sender as a parameter in the sender's zone.
+                $this->Mail->setFrom($this->Mail->Username);
+                // Assinging the receiver mail's address which is retrieved from the User class.
+                $this->Mail->addAddress($this->API->resultSet()[0]['UserMailAddress']);
+                $this->Mail->Subject = "Library System: Notification";
+                $this->Mail->Body = "The book titled, {$this->Book->getTitle()} can be taken at the counter!  Please come and take it as soon as possible!";
+                // Sending the mail.
+                $this->Mail->send();
+                header("refresh:5.1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
+            }
+        } else {
+            header("refresh:5.1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Profile/Loan_Management");
         }
     }
 }
