@@ -202,11 +202,11 @@ class Loan {
                             $this->API->execute();
                             echo "
                             <h1 id='success'>
-                                {$this->Book->getTitle()} has been borrowed!  You will be notified by mail to come and take your book at the counter as well as you will be redirected to the page hwere you can see all your loans.
+                                {$this->Book->getTitle()} has been borrowed!  You will be notified by mail to come and take your book at the counter as well as you will be redirected to the page where you can see all your loans.
                             </h1>";
                             // Calling Collect Book method
                             $this->collectBook();
-                            header("refresh:5.0; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Borrowed_Books");
+                            header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Borrowed_Books");
                         } else {
                             echo "
                             <h1 id='failure'>
@@ -220,7 +220,7 @@ class Loan {
                         <h1 id='failure'>
                             There is a problem with the system.  You will be redirected to the Member's portal but please report the issue to an administrator.
                         </h1>";
-                        header("refresh:5.6; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+                        header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
                     }
                 } else {
                     echo "
@@ -272,11 +272,11 @@ class Loan {
                             $this->API->execute();
                             echo "
                             <h1 id='success'>
-                                {$this->Book->getTitle()} has been borrowed!  You will be notified by mail to come and take your book at the counter as well as you will be redirected to the page hwere you can see all your loans.
+                                {$this->Book->getTitle()} has been borrowed!  You will be notified by mail to come and take your book at the counter as well as you will be redirected to the page where you can see all your loans.
                             </h1>";
                             // Calling Collect Book method
                             $this->collectBook();
-                            header("refresh:5.0; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Borrowed_Books");
+                            header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Profile/Borrowed_Books");
                         } else {
                             echo "
                             <h1 id='failure'>
@@ -290,7 +290,7 @@ class Loan {
                         <h1 id='failure'>
                             There is a problem with the system.  You will be redirected to the Member's portal but please report the issue to an administrator.
                         </h1>";
-                        header("refresh:5.6; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+                        header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
                     }
                 } else {
                     echo "
@@ -305,14 +305,14 @@ class Loan {
                 <h1 id='failure'>
                     There is either a problem with your account or with the system.  You will be logged out but you can reconnect into the system and can also report the problem to an administrator!
                 </h1>";
-                header("refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
+                header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
             }
         } else {
             echo "
             <h1 id='failure'>
                 There is either a problem with your account or with the system.  You will be logged out but you can reconnect into the system and can also report the problem to an administrator!
             </h1>";
-            header("refresh:0.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
+            header("refresh:7.8; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member/Logout");
         }
     }
     // Collect Book method
@@ -353,14 +353,14 @@ class Loan {
                 // Ensuring that PHPMailer is called from a .html file.
                 $this->Mail->IsHTML(true);
                 // Sender's mail address.
-                $this->Mail->Username = "";
+                $this->Mail->Username = "andygaspard003@gmail.com";
                 // Sender's password
-                $this->Mail->Password = "";
+                $this->Mail->Password = "Aegis050200";
                 // Assigning sender as a parameter in the sender's zone.
                 $this->Mail->setFrom($this->Mail->Username);
                 // Assinging the receiver mail's address which is retrieved from the User class.
                 $this->Mail->addAddress($this->User->getMailAddress());
-                $this->Mail->subject = "Library System: Notification";
+                $this->Mail->Subject = "Library System: Notification";
                 $this->Mail->Body = "The book titled, {$this->Book->getTitle()} can be taken at the counter!  Please come and take it as soon as possible!";
                 // Sending the mail.
                 $this->Mail->send();
@@ -457,7 +457,7 @@ class Loan {
                     No book has been borrowed! You can borrow all the books that you want as long as it does not exceed the limit. 😉
                 </h2>
             </div>";
-            header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+            header("refresh:2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
         }
     }
     // Record Return method
