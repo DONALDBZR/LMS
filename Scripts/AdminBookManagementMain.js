@@ -1,8 +1,8 @@
 // Show Form function
 function showForm(clickedButton) {
     // Storing HTML element
-    var addForm = document.getElementById("addForm");
-    var updateForm = document.getElementById("updateForm");
+    const addForm = document.getElementById("addForm");
+    const updateForm = document.getElementById("updateForm");
     // If-Statement to verify which button is clicked.
     if (clickedButton === "formAddButton") {
         // If-statement to verify if Add Form is being shown.
@@ -23,6 +23,15 @@ function showForm(clickedButton) {
 // Request Server Attention function
 function requestServerAttention(clickedButton) {
     // Removing the ID that is used for styling the Remove Book button
-    var isbn = clickedButton.replace("removeButton ", "");
+    const isbn = clickedButton.replace("removeButton ", "");
     document.cookie = "isbn=" + isbn;
+}
+// Update function
+function update(clickedButton) {
+    // Removing the ID that is used for styling the Remove Book button
+    const isbn = clickedButton.replace("updateButton ", "");
+    document.cookie = "isbn=" + isbn;
+    // Removing the ID that is used for styling the Remove Book button
+    const trigger = clickedButton.replace(isbn, "");
+    showForm(trigger);
 }

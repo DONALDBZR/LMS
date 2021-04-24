@@ -1,9 +1,9 @@
 // Storing JSX variables
 const homepageSection = React.createElement(
     "a",
-    {},
+    {href:"../"},
     React.createElement("img", {
-        src: "http://stormysystem.ddns.net/LibrarySystem/Images/Logo - 1.png",
+        src: "http://stormysystem.ddns.net/LibraryManagementSystem/Images/Logo - 1.png",
         alt: "Homepage",
     })
 );

@@ -3,8 +3,7 @@ const homepageSection = React.createElement(
     "a",
     { href: "http://stormysystem.ddns.net/LibraryManagementSystem/Admin" },
     React.createElement("img", {
-        src:
-            "http://stormysystem.ddns.net/LibraryManagementSystem/Images/Logo - 1.png",
+        src: "http://stormysystem.ddns.net/LibraryManagementSystem/Images/Logo - 1.png",
         alt: "Homepage",
     })
 );

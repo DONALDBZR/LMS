@@ -12,69 +12,71 @@ const logout = React.createElement(
     { href: "./Logout" },
     React.createElement("i", { className: "fa fa-sign-out faLogoutCustom" })
 );
-const adminForms = [
+const user = [
     React.createElement(
         "div",
-        { id: "report" },
-        React.createElement(
-            "h1",
-            {},
-            "To generate and send the report for the management, click on the report button below."
-        ),
-        React.createElement(
-            "form",
-            { method: "post" },
-            React.createElement(
-                "div",
-                { id: "reportButton" },
-                React.createElement("input", {
-                    type: "submit",
-                    value: "Report",
-                    name: "generateReport",
-                })
-            )
-        )
+        { id: "logo" },
+        React.createElement("i", { className: "fa fa-user faUser" })
     ),
-    React.createElement(
-        "div",
-        { id: "mail" },
-        React.createElement("h1", {}, "Mail Form"),
-        React.createElement(
-            "p",
-            {},
-            "Please fill in this form to send a mail reminder."
-        ),
-        React.createElement(
-            "form",
-            { method: "post" },
-            React.createElement("input", {
-                type: "email",
-                name: "mail",
-                id: "mailInput",
-                placeholder: "E-Mail",
-                attribute: "required",
-            }),
-            React.createElement("input", {
-                type: "text",
-                name: "message",
-                id: "mailMessage",
-                placeholder: "Message",
-                attribute: "required",
-            }),
-            React.createElement(
-                "div",
-                { id: "sendMailButton" },
-                React.createElement("input", {
-                    type: "submit",
-                    value: "Send",
-                    id: "sendMail",
-                    name: "sendMailReminder",
-                })
-            )
-        )
-    ),
+    React.createElement("div", { id: "description" }, "Registered Users"),
 ];
+const book = [
+    React.createElement(
+        "div",
+        { id: "logo" },
+        React.createElement("i", { className: "fa fa-book faBook" })
+    ),
+    React.createElement("div", { id: "description" }, "Books Offered"),
+];
+const loan = [
+    React.createElement(
+        "div",
+        { id: "logo" },
+        React.createElement("i", { className: "fa fa-file faFile" })
+    ),
+    React.createElement("div", { id: "description" }, "Loans taken"),
+];
+const bannedUser = [
+    React.createElement(
+        "div",
+        { id: "logo" },
+        React.createElement("i", { className: "fa fa-user-times faBannedUser" })
+    ),
+    React.createElement("div", { id: "description" }, "Banned Users"),
+];
+const damagedBook = [
+    React.createElement(
+        "div",
+        { id: "logo" },
+        React.createElement("i", { className: "fa fa-ban faDamagedBook" })
+    ),
+    React.createElement("div", { id: "description" }, "Damaged Books"),
+];
+const overdue = [
+    React.createElement(
+        "div",
+        { id: "logo" },
+        React.createElement("i", {
+            className: "fa fa-exclamation-triangle faOverdue",
+        })
+    ),
+    React.createElement("div", { id: "description" }, "Overdued Loans"),
+];
+const generateReport = React.createElement("form", { method: "get" }, [
+    React.createElement("button", {
+        type: "submit",
+        className: "fa fa-file faReport",
+        name: "report",
+    }),
+    React.createElement("div", null, "Report"),
+]);
 // Rendering Admin Homepage
 ReactDOM.render(homepageSection, document.getElementById("homepageSection"));
 ReactDOM.render(logout, document.getElementById("logout"));
-ReactDOM.render(adminForms, document.getElementById("adminForms"));
+ReactDOM.render(user, document.getElementById("user"));
+ReactDOM.render(book, document.getElementById("book"));
+ReactDOM.render(loan, document.getElementById("loan"));
+ReactDOM.render(bannedUser, document.getElementById("bannedUser"));
+ReactDOM.render(damagedBook, document.getElementById("damagedBook"));
+ReactDOM.render(overdue, document.getElementById("overdue"));
+ReactDOM.render(generateReport, document.getElementById("generateReport"));
