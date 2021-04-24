@@ -239,7 +239,7 @@ class Reservation {
                     No book has been reserved! You can reserve all the books that you want as long as it does not exceed the limit. 😉
                 </h1>
             </div>";
-            header("refresh:1; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
+            header("refresh:2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Member");
         }
     }
 }
