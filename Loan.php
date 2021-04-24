@@ -353,9 +353,9 @@ class Loan {
                 // Ensuring that PHPMailer is called from a .html file.
                 $this->Mail->IsHTML(true);
                 // Sender's mail address.
-                $this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Username = "";
                 // Sender's password
-                $this->Mail->Password = "Aegis050200";
+                $this->Mail->Password = "";
                 // Assigning sender as a parameter in the sender's zone.
                 $this->Mail->setFrom($this->Mail->Username);
                 // Assinging the receiver mail's address which is retrieved from the User class.
@@ -837,9 +837,9 @@ class Loan {
                 // Ensuring that PHPMailer is called from a .html file.
                 $this->Mail->IsHTML(true);
                 // Sender's mail address.
-                $this->Mail->Username = "andygaspard003@gmail.com";
+                $this->Mail->Username = "";
                 // Sender's password
-                $this->Mail->Password = "Aegis050200";
+                $this->Mail->Password = "";
                 // Assigning sender as a parameter in the sender's zone.
                 $this->Mail->setFrom($this->Mail->Username);
                 // Assinging the receiver mail's address which is retrieved from the User class.
