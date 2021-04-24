@@ -6,9 +6,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/LibraryManagementSystem/PHPMailer/src
 require_once $_SERVER['DOCUMENT_ROOT'] . "/LibraryManagementSystem/PHPMailer/src/Exception.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/LibraryManagementSystem/PHPMailer/src/SMTP.php";
 class Admin extends User {
-    // Class variables
-    protected $API;
-    protected $Mail;
     // Constructor method
     public function __construct() {
         // Instantiating API
@@ -68,7 +65,7 @@ class Admin extends User {
     public function getAmountTodayLoan() {
         $today = date("Y-m-d");
         // Preparing the query
-        $this->API->query("SELECT * FROM LibrarySystem.Loan WHERE LoanDate = :LoanDate AND LoanReturned = :LoanReturned");
+        $this->API->query("SELECT * FROM LibrarySystem.Loan WHERE LoanDate < :LoanDate AND LoanReturned = :LoanReturned");
         // Binding the value for security purposes
         $this->API->bind(":LoanDate", $today);
         $this->API->bind(":LoanReturned", 0);
@@ -82,9 +79,10 @@ class Admin extends User {
     // Get Amount Overdue method
     public function getAmountOverdue() {
         // Preparing the query
-        $this->API->query("SELECT * FROM LibrarySystem.Loan WHERE LoanOverdue = :LoanOverdue");
-        // Binding the value for security purpose
+        $this->API->query("SELECT * FROM LibrarySystem.Loan WHERE LoanOverdue = :LoanOverdue AND LoanReturned = :LoanReturned");
+        // Binding the values for security purpose
         $this->API->bind(":LoanOverdue", 1);
+        $this->API->bind(":LoanReturned", 0);
         // Executing the query
         $this->API->execute();
         // Counting the amount of overdued loans
@@ -129,14 +127,14 @@ class Admin extends User {
             // Ensuring that PHPMailer is called from a .html file.
             $this->Mail->IsHTML(true);
             // Sender's mail address.
-            $this->Mail->Username = "";
+            $this->Mail->Username = "andygaspard003@gmail.com";
             // Sender's password
-            $this->Mail->Password = "";
+            $this->Mail->Password = "Aegis050200";
             // Assigning sender as a parameter in the sender's zone.
             $this->Mail->setFrom($this->Mail->Username);
             // Assinging the receiver mail's address which is retrieved from the User class.
             $this->Mail->addAddress($this->getMailAddress());
-            $this->Mail->subject = "Library System: Notification";
+            $this->Mail->Subject = "Library System: Report";
             $this->Mail->Body = $report;
             // Sending the mail.
             $this->Mail->send();
@@ -144,13 +142,13 @@ class Admin extends User {
             <h1 id='success'>
                 The report has been sent!
             </h1>";
-            header('refresh:4.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin');
+            header('refresh:2.7; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin');
         } else {
             echo "
             <h1 id='failure'>
                 There is an error in the system! The page will refresh to fix the issue.
             </h1>";
-            header('refresh:1.2; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin');
+            header('refresh:2.7; url=http://stormysystem.ddns.net/LibraryManagementSystem/Admin');
         }
     }
     // Send Mail Reminder method
@@ -172,14 +170,14 @@ class Admin extends User {
         // Ensuring that PHPMailer is called from a .html file.
         $this->Mail->IsHTML(true);
         // Sender's mail address.
-        $this->Mail->Username = "";
+        $this->Mail->Username = "andygaspard003@gmail.com";
         // Sender's password
-        $this->Mail->Password = "";
+        $this->Mail->Password = "Aegis050200";
         // Assigning sender as a parameter in the sender's zone.
         $this->Mail->setFrom($this->Mail->Username);
         // Assinging the receiver mail's address which is retrieved from the User class.
         $this->Mail->addAddress($_POST['mail']);
-        $this->Mail->subject = "Library System: Notification";
+        $this->Mail->Subject = "Library System: Reminder";
         $this->Mail->Body = $_POST['message'];
         // Sending the mail.
         $this->Mail->send();
