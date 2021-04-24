@@ -32,7 +32,7 @@ $User = new User();
                 </a>
             </div>
             <div id="logout">
-                <a href="http://stormysystem.ddns.net/LibrarySystem/Admin/Logout">
+                <a href="http://stormysystem.ddns.net/LibraryManagementSystem/Admin/Logout">
                     <i class="fa fa-sign-out faLogoutCustom"></i>
                 </a>
             </div>
