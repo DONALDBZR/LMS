@@ -91,13 +91,14 @@ class Book {
     // Search Books method
     public function searchBooks() {
         // Preparing the query to return fields from the value entered that are already in the database.
-        $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookIsbn = :BookIsbn OR BookTitle = :BookTitle OR BookAuthor = :BookAuthor OR BookPublisher = :BookPublisher OR BookCategory = :BookCategory");
+        $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookState = :BookState AND BookIsbn = :BookIsbn OR BookTitle = :BookTitle OR BookAuthor = :BookAuthor OR BookPublisher = :BookPublisher OR BookCategory = :BookCategory");
         // Binding the values returned by the search bar for security purposes.
         $this->API->bind(":BookIsbn", $_GET["search"]);
         $this->API->bind(":BookTitle", $_GET["search"]);
         $this->API->bind(":BookAuthor", $_GET["search"]);
         $this->API->bind(":BookPublisher", $_GET["search"]);
         $this->API->bind(":BookCategory", $_GET["search"]);
+        $this->API->bind(":BookState", 1);
         // Executing the query.
         $this->API->execute();
         // If-statement verifying whether values are returned from the query
@@ -306,7 +307,11 @@ class Book {
         // Storing Post's Update State value to be verified.
         $postState = $_POST['inputUpdateState'];
         // If-statement to verify the value of Post State
-        if ($postState == "damaged") {
+        if ($postState == "damaged" && $this->getStock() > 0) {
+            $this->setState(1);
+            $newStock = $this->getStock() - 1;
+            $this->setStock($newStock);
+        } else if ($postState == "damaged" && $this->getStock() == 0) {
             $this->setState(0);
         } else if ($postState == "not-damaged") {
             $this->setState(1);
