@@ -258,7 +258,7 @@ class Book {
         // Assigning 1 as a parameter for the mutator for State.
         $this->setState(1);
         // Storing the image directory
-        $imageDirectory = "/LibrarySystem/Images/";
+        $imageDirectory = "/LibraryManagementSystem/Images/";
         // The path of the image file in the server
         $imageFile = $imageDirectory . basename($_FILES['image']['name']);
         // The uploaded path of the image file in the server.
