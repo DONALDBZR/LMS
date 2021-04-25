@@ -91,13 +91,13 @@ class Book {
     // Search Books method
     public function searchBooks() {
         // Preparing the query to return fields from the value entered that are already in the database.
-        $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookState = :BookState AND BookIsbn = :BookIsbn OR BookTitle = :BookTitle OR BookAuthor = :BookAuthor OR BookPublisher = :BookPublisher OR BookCategory = :BookCategory");
+        $this->API->query("SELECT * FROM LibrarySystem.Book WHERE BookState = :BookState AND BookIsbn LIKE :BookIsbn OR BookTitle LIKE :BookTitle OR BookAuthor LIKE :BookAuthor OR BookPublisher LIKE :BookPublisher OR BookCategory LIKE :BookCategory");
         // Binding the values returned by the search bar for security purposes.
-        $this->API->bind(":BookIsbn", $_GET["search"]);
-        $this->API->bind(":BookTitle", $_GET["search"]);
-        $this->API->bind(":BookAuthor", $_GET["search"]);
-        $this->API->bind(":BookPublisher", $_GET["search"]);
-        $this->API->bind(":BookCategory", $_GET["search"]);
+        $this->API->bind(":BookIsbn", "%{$_GET["search"]}%");
+        $this->API->bind(":BookTitle", "%{$_GET["search"]}%");
+        $this->API->bind(":BookAuthor", "%{$_GET["search"]}%");
+        $this->API->bind(":BookPublisher", "%{$_GET["search"]}%");
+        $this->API->bind(":BookCategory", "%{$_GET["search"]}%");
         $this->API->bind(":BookState", 1);
         // Executing the query.
         $this->API->execute();
