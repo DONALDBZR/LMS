@@ -12,7 +12,7 @@ body {
 }
 /* Header */
 #Homepage header h1 {
-    font-size: calc(var(--textSize) * 2);
+    font-size: calc(var(--textSize) * 1.62);
     margin: calc(var(--percentage) * 0);
 }
 /* Main */
@@ -41,7 +41,7 @@ body {
     margin-top: calc(var(--percentage) / 50);
 }
 #Homepage main #right #systemEntries div a {
-    padding: calc(var(--percentage) / 20) calc(var(--percentage) / 10);
-    font-size: calc(var(--textSize) * 2);
+    padding: calc(var(--pixelate) / 108) calc(var(--pixelate) / 216);
+    font-size: calc(var(--textSize) * 1.62);
     font-weight: bold;
 }
