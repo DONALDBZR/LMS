@@ -1,3 +1,3 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/LibraryManagementSystem/Pages/Homepage.html';
-?>
+// Importing Routes
+require_once "{$_SERVER['DOCUMENT_ROOT']}/Routes.php";
