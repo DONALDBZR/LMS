@@ -1,0 +1,47 @@
+:root {
+    --percentage: 100%;
+    --pixelate: 1080px;
+    --tablet: 0.729;
+    --textSize: calc(var(--percentage) * var(--tablet) * 1.61051);
+}
+body {
+    font-size: var(--textSize);
+    width: var(--percentage);
+    height: var(--percentage);
+    margin: calc(var(--percentage) * 0);
+}
+/* Header */
+#Homepage header h1 {
+    font-size: calc(var(--textSize) * 2);
+    margin: calc(var(--percentage) * 0);
+}
+/* Main */
+#Homepage main {
+    width: var(--percentage);
+    margin-top: calc(var(--percentage) / 100);
+}
+#Homepage main #left,
+#Homepage main #right {
+    width: calc(var(--percentage) / 2);
+}
+#Homepage main #left img {
+    width: var(--percentage);
+    height: auto;
+}
+#Homepage main #right #message {
+    font-size: calc(var(--textSize) * 0.9);
+    font-weight: 600;
+    margin: calc(var(--percentage) / 50) calc(var(--percentage) * 0);
+}
+#Homepage main #right #notice {
+    font-size: var(--textSize);
+    margin: calc(var(--percentage) / 50) calc(var(--percentage) * 0);
+}
+#Homepage main #right #systemEntries div {
+    margin-top: calc(var(--percentage) / 50);
+}
+#Homepage main #right #systemEntries div a {
+    padding: calc(var(--percentage) / 20) calc(var(--percentage) / 10);
+    font-size: calc(var(--textSize) * 2);
+    font-weight: bold;
+}

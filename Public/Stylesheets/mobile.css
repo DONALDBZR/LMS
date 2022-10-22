@@ -1,0 +1,49 @@
+:root {
+    --percentage: 100%;
+    --pixelate: 1080px;
+    --mobile: 0.59049;
+    --textSize: calc(var(--percentage) * var(--mobile) * 2);
+}
+body {
+    font-size: var(--textSize);
+    width: var(--percentage);
+    height: var(--percentage);
+    margin: calc(var(--percentage) * 0);
+}
+/* Header */
+#Homepage header h1 {
+    font-size: calc(var(--textSize) * 2);
+    margin: calc(var(--percentage) * 0);
+}
+/* Main */
+#Homepage main {
+    width: var(--percentage);
+    margin-top: calc(var(--percentage) / 100);
+    display: block;
+}
+#Homepage main #left,
+#Homepage main #right {
+    width: var(--percentage);
+}
+#Homepage main #left img {
+    width: calc(var(--percentage) * 0.9);
+    height: auto;
+    margin: calc(var(--percentage) * 0) calc(var(--percentage) / 20);
+}
+#Homepage main #right #message {
+    font-size: var(--textSize);
+    font-weight: 600;
+    margin: calc(var(--percentage) / 50) calc(var(--percentage) * 0);
+}
+#Homepage main #right #notice {
+    font-size: var(--textSize);
+    margin: calc(var(--percentage) / 100) calc(var(--percentage) * 0);
+}
+#Homepage main #right #systemEntries div {
+    margin-top: calc(var(--percentage) / 100);
+}
+#Homepage main #right #systemEntries div a {
+    padding: calc(var(--percentage) * 0.0375) calc(var(--percentage) * 0.075);
+    font-size: calc(var(--textSize) * 1.5);
+    font-weight: bold;
+}

@@ -1,0 +1,87 @@
+/* Brandon Grotesque */
+@font-face {
+    font-family: "Brandon Grotesque";
+    src: url("../Fonts/Brandon Grotesque - Black.otf");
+    src: url("../Fonts/Brandon Grotesque - Bold Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light.otf");
+    src: url("../Fonts/Brandon Grotesque - Medium Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Thin Italic.otf");
+}
+/* Proxima Nova */
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("../Fonts/Proxima Nova.otf");
+    src: url("../Fonts/Proxima Nova - Alternate.otf");
+}
+/* CSS Variables */
+:root {
+    --brandonGrotesque: "Brandon Grotesque";
+    --proximaNova: "Proxima Nova";
+    --backgroundColor1: rgb(0, 64, 255);
+    --backgroundColor2: rgb(64, 128, 255);
+    --backgroundColor3: rgb(255, 128, 64);
+    --foregroundColor1: rgb(255, 255, 255);
+    --foregroundColor2: rgb(0, 0, 0);
+    --foregroundColor3: rgba(255, 255, 255, 0.5);
+    --formForegroundColor1: rgba(0, 0, 0, 0.5);
+    --formForegroundColor2: rgba(0, 0, 0, 0.75);
+    --failure: rgb(255, 0, 0);
+    --success: rgb(0, 255, 0);
+    --bold: 700;
+    --extraBold: 800;
+    --horizontal: 100%;
+    --vertical: 100%;
+    --fontSize: 100%;
+    --opacity: 100%;
+    --logoHeight: 104px;
+    --logoWidth: 87px;
+    --time: 1s;
+    --navHeight: 52px;
+    /* Page Styling configuration */
+    background-color: var(--backgroundColor3);
+    color: var(--foregroundColor1);
+    font-size: var(--fontSize);
+    width: var(--horizontal);
+    height: var(--vertical);
+    font-family: sans-serif;
+}
+/* Header */
+header {
+    width: var(--horizontal);
+}
+header img {
+    margin: 0 calc(var(--horizontal) * (211 / 450));
+    width: auto;
+    height: var(--vertical);
+}
+#success {
+    color: var(--success);
+    text-align: center;
+}
+/* Media Queries to fit on a screen of a smartphone on portrait mode */
+@media screen and (device-width: 360px) and (orientation: portrait) {
+    header img {
+        margin: 0 calc(var(--horizontal) * (23 / 60));
+        width: auto;
+        height: var(--vertical);
+    }
+    #success {
+        font-size: calc(
+            var(--fontSize) * 2 *
+                (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9)
+        );
+    }
+}
+/* Media Queries to fit on a screen of a smartphone on landscape mode */
+@media screen and (device-width: 640px) and (orientation: landscape) {
+    header img {
+        margin: 0 calc(var(--horizontal) * (139 / 320));
+        width: auto;
+        height: var(--vertical);
+    }
+    #success {
+        font-size: calc(
+            var(--fontSize) * 2 * (0.9 * 0.9 * 0.9 * 0.9));
+}

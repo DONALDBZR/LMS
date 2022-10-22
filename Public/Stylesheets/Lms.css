@@ -1,0 +1,119 @@
+@font-face {
+    font-family: "Brandon Grotesque";
+    src: url("/Public/Fonts/Brandon Grotesque - Black.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Bold Italic.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Italic.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Light Italic.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Light.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Medium Italic.otf");
+    src: url("/Public/Fonts/Brandon Grotesque - Thin Italic.otf");
+}
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("/Public/Fonts/Proxima Nova.otf");
+    src: url("/Public/Fonts/Proxima Nova - Alternate.otf");
+}
+@font-face {
+    font-family: "Montserrat";
+    src: url("/Public/Fonts/Montserrat - Alternates - Black.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Black - Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Extra Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Extra Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Extra Light.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Extra Light Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Light Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Light.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Medium.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Medium Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Regular.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Semi Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Semi Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Thin Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Alternates - Thin.otf");
+    src: url("/Public/Fonts/Montserrat - Black.otf");
+    src: url("/Public/Fonts/Montserrat - Black - Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Extra Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Extra Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Extra Light.otf");
+    src: url("/Public/Fonts/Montserrat - Extra Light Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Light Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Light.otf");
+    src: url("/Public/Fonts/Montserrat - Medium.otf");
+    src: url("/Public/Fonts/Montserrat - Medium Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Regular.otf");
+    src: url("/Public/Fonts/Montserrat - Semi Bold Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Semi Bold.otf");
+    src: url("/Public/Fonts/Montserrat - Thin Italic.otf");
+    src: url("/Public/Fonts/Montserrat - Thin.otf");
+}
+/* CSS Variables */
+:root {
+    --brandonGrotesque: "Brandon Grotesque";
+    --proximaNova: "Proxima Nova";
+    --montserrat: "Montserrat";
+    --color1: rgb(0, 64, 255);
+    --color2: rgb(64, 128, 255);
+    --color3: rgb(255, 255, 255);
+    --color4: rgb(0, 0, 0);
+    --color5: rgba(255, 255, 255, 0.5);
+    --color6: rgb(0, 204, 204);
+    --color7: rgba(0, 0, 0, 0.7);
+    --color8: rgb(0, 128, 255);
+    --color9: rgba(0, 0, 0, 0.5);
+    --color10: rgba(0, 0, 0, 0.75);
+    --color10: rgba(0, 0, 0, 0.1);
+    --color11: rgba(0, 0, 0, 0);
+    --failure: rgb(255, 0, 0);
+    --success: rgb(0, 255, 0);
+    --percentage: 100%;
+    --time: 1s;
+}
+body {
+    background-color: var(--color3);
+    color: var(--color4);
+    font-family: sans-serif;
+    margin: 0;
+}
+/* Header */
+#Homepage header h1 {
+    font-family: var(--montserrat);
+    color: var(--color6);
+    text-transform: uppercase;
+}
+/* Main */
+#Homepage main {
+    display: flex;
+}
+#Homepage main #right #systemEntries {
+    display: flex;
+    justify-content: space-evenly;
+}
+#Homepage main #right #message {
+    font-family: var(--montserrat);
+    text-transform: uppercase;
+    color: var(--color7);
+    text-align: center;
+}
+#Homepage main #right #notice {
+    font-family: var(--proximaNova);
+    text-transform: none;
+    color: var(--color8);
+    text-decoration: underline;
+    text-align: center;
+}
+#Homepage main #right #systemEntries div a {
+    text-decoration: none;
+    color: var(--color3);
+    background-color: var(--color6);
+    font-family: var(--proximaNova);
+}
+#Homepage main #right #systemEntries div a:hover {
+    color: var(--color6);
+    background-color: var(--color3);
+}

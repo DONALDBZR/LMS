@@ -1,0 +1,402 @@
+/* Brandon Grotesque */
+@font-face {
+    font-family: "Brandon Grotesque";
+    src: url("../Fonts/Brandon Grotesque - Black.otf");
+    src: url("../Fonts/Brandon Grotesque - Bold Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Light.otf");
+    src: url("../Fonts/Brandon Grotesque - Medium Italic.otf");
+    src: url("../Fonts/Brandon Grotesque - Thin Italic.otf");
+}
+/* Proxima Nova */
+@font-face {
+    font-family: "Proxima Nova";
+    src: url("../Fonts/Proxima Nova.otf");
+    src: url("../Fonts/Proxima Nova - Alternate.otf");
+}
+/* Montserrat */
+@font-face {
+    font-family: "Montserrat";
+    src: url("../Fonts/Montserrat - Alternates - Black.otf");
+    src: url("../Fonts/Montserrat - Alternates - Black - Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Bold.otf");
+    src: url("../Fonts/Montserrat - Alternates - Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Extra Bold.otf");
+    src: url("../Fonts/Montserrat - Alternates - Extra Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Extra Light.otf");
+    src: url("../Fonts/Montserrat - Alternates - Extra Light Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Light Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Light.otf");
+    src: url("../Fonts/Montserrat - Alternates - Medium.otf");
+    src: url("../Fonts/Montserrat - Alternates - Medium Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Regular.otf");
+    src: url("../Fonts/Montserrat - Alternates - Semi Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Semi Bold.otf");
+    src: url("../Fonts/Montserrat - Alternates - Thin Italic.otf");
+    src: url("../Fonts/Montserrat - Alternates - Thin.otf");
+    src: url("../Fonts/Montserrat - Black.otf");
+    src: url("../Fonts/Montserrat - Black - Italic.otf");
+    src: url("../Fonts/Montserrat - Bold.otf");
+    src: url("../Fonts/Montserrat - Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Extra Bold.otf");
+    src: url("../Fonts/Montserrat - Extra Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Extra Light.otf");
+    src: url("../Fonts/Montserrat - Extra Light Italic.otf");
+    src: url("../Fonts/Montserrat - Italic.otf");
+    src: url("../Fonts/Montserrat - Light Italic.otf");
+    src: url("../Fonts/Montserrat - Light.otf");
+    src: url("../Fonts/Montserrat - Medium.otf");
+    src: url("../Fonts/Montserrat - Medium Italic.otf");
+    src: url("../Fonts/Montserrat - Regular.otf");
+    src: url("../Fonts/Montserrat - Semi Bold Italic.otf");
+    src: url("../Fonts/Montserrat - Semi Bold.otf");
+    src: url("../Fonts/Montserrat - Thin Italic.otf");
+    src: url("../Fonts/Montserrat - Thin.otf");
+}
+/* CSS Variables */
+:root {
+    --brandonGrotesque: "Brandon Grotesque";
+    --proximaNova: "Proxima Nova";
+    --montserrat: "Montserrat";
+    --backgroundColor1: rgb(0, 64, 255);
+    --backgroundColor2: rgb(64, 128, 255);
+    --backgroundColor3: rgb(255, 128, 64);
+    --foregroundColor1: rgb(255, 255, 255);
+    --foregroundColor2: rgb(0, 0, 0);
+    --foregroundColor3: rgba(255, 255, 255, 0.5);
+    --foregroundColor4: rgb(0, 204, 204);
+    --foregroundColor5: rgba(0, 0, 0, 0.7);
+    --formForegroundColor1: rgba(0, 0, 0, 0.5);
+    --formForegroundColor2: rgba(0, 0, 0, 0.75);
+    --failure: rgb(255, 0, 0);
+    --success: rgb(0, 255, 0);
+    --bold: 700;
+    --extraBold: 800;
+    --horizontal: 100%;
+    --vertical: 100%;
+    --fontSize: 100%;
+    --opacity: 100%;
+    --logoHeight: 104px;
+    --logoWidth: 87px;
+    --time: 1s;
+    --navHeight: 52px;
+    --semiBold: 600;
+    --formBackgroundColor1: rgba(0, 0, 0, 0.1);
+    --formBackgroundColor2: rgba(0, 0, 0, 0);
+    --coverHeight: 270px;
+    --textHeight: 100px;
+    /* Page Styling configuration */
+    background-color: var(--backgroundColor2);
+    color: var(--foregroundColor1);
+    font-size: var(--fontSize);
+    width: var(--horizontal);
+    height: var(--vertical);
+    font-family: sans-serif;
+}
+/* Navigation Bar */
+nav {
+    display: flex;
+    height: calc(var(--logoHeight) / 2);
+}
+#homepageSection,
+#navigationBarComponents {
+    width: calc(var(--horizontal) / 2);
+}
+/* Homepage Section */
+#homepageSection img {
+    width: auto;
+    height: var(--vertical);
+}
+#homepageSection img:hover,
+#navigationBarComponents img:hover,
+.faProfile:hover,
+.faLogout:hover {
+    opacity: calc(var(--opacity) / 2);
+}
+/* Navigation Bar Components */
+#navigationBarComponents {
+    display: flex;
+}
+#navigationBarComponents img {
+    width: auto;
+    height: var(--navHeight);
+}
+#profile,
+#navigationBarComponents form,
+#logout {
+    width: calc(var(--horizontal) / 3);
+}
+#navigationBarComponents form {
+    height: auto;
+    margin-top: calc(var(--vertical) * 0.0475);
+    display: flex;
+}
+#navigationBarComponents a {
+    text-transform: none;
+    color: var(--foregroundColor1);
+    font-size: calc(var(--fontSize) * 3.25);
+    text-decoration: none;
+    font-family: var(--proximaNova);
+    width: calc(var(--horizontal) / 3);
+    text-align: center;
+}
+#navigationBarComponents a:hover {
+    text-decoration: underline;
+    opacity: calc(var(--fontSize) / 2);
+}
+#navigationBarComponents input {
+    border: none;
+    font-size: var(--fontSize);
+    width: calc(var(--horizontal) * (0.9 * 0.9));
+    font-family: var(--proximaNova);
+}
+.faSearch,
+.faProfile,
+.faLogout {
+    color: var(--foregroundColor1);
+    background-color: var(--backgroundColor2);
+}
+.faSearch:hover {
+    color: var(--backgroundColor2);
+    background-color: var(--foregroundColor1);
+    cursor: pointer;
+}
+#profile a {
+    margin: 0 calc(var(--horizontal) * (2348 / 5625));
+}
+#logout a {
+    margin: 0 calc(var(--horizontal) * (589 / 1500));
+}
+#navigationBarComponents button {
+    border: none;
+}
+/* Welcome Text */
+#welcomeText {
+    width: 100%;
+    overflow: hidden;
+}
+#welcomeText h1 {
+    font-size: calc(var(--fontSize) * 2);
+    animation: welcomeText calc(var(--time) * 10) infinite linear;
+    /* animation: calc(var(--time) * 4) welcomeText calc(var(--time) * 4) forwards; */
+    transform: translateX(100%);
+}
+@keyframes welcomeText {
+    to {
+        transform: translateX(0);
+    }
+}
+#welcomeText h1:hover {
+    animation-play-state: paused;
+}
+/* Message */
+#message1,
+#message2 {
+    font-family: var(--proximaNova);
+    font-size: var(--fontSize);
+    font-weight: var(--bold);
+    color: var(--foregroundColor2);
+    margin: calc(var(--vertical) * 0.01) 0;
+    text-align: center;
+}
+/* Search Results */
+#searchResults {
+    width: calc(var(--horizontal) * 0.9);
+    margin: 0 calc(var(--horizontal) * 0.05);
+}
+#amountFound {
+    font-family: var(--proximaNova);
+    font-weight: var(--bold);
+    font-size: var(--fontSize);
+    margin: calc(var(--vertical) * 0.01) 0;
+}
+#found {
+    width: var(--horizontal);
+    background-color: var(--foregroundColor1);
+    display: flex;
+    color: var(--foregroundColor2);
+}
+#left,
+#right {
+    width: calc(var(--horizontal) / 2);
+}
+#left img {
+    width: auto;
+    height: var(--coverHeight);
+}
+#foundIsbn,
+#foundStock,
+#foundAuthor,
+#foundTitle,
+#foundPublisher,
+#foundBookLocation,
+#foundCategory,
+#actions form {
+    width: var(--horizontal);
+    display: flex;
+}
+#foundIsbn h1,
+#foundStock h1,
+#foundAuthor h1,
+#foundTitle h1,
+#foundPublisher h1,
+#foundBookLocation h1,
+#foundCategory h1 {
+    width: calc(var(--horizontal) / 2);
+    font-family: var(--proximaNova);
+    font-weight: var(--extraBold);
+    font-size: var(--fontSize);
+    margin: calc(var(--vertical) * 0.005) 0;
+}
+#borrow,
+#reserve {
+    width: calc(var(--horizontal) / 2);
+}
+#borrow input,
+#reserve input {
+    font-size: var(--fontSize);
+    font-weight: var(--bold);
+    font-family: var(--proximaNova);
+    border: none;
+    cursor: pointer;
+    background-color: var(--backgroundColor2);
+    color: var(--foregroundColor1);
+    padding: calc(var(--vertical) * 0.05) calc(var(--horizontal) * 0.1);
+}
+#borrow input:hover,
+#reserve input:hover {
+    color: var(--backgroundColor2);
+    background-color: var(--foregroundColor1);
+}
+#borrow input {
+    margin: 0 calc(var(--horizontal) * 0.31655967);
+}
+#reserve input {
+    margin: 0 calc(var(--horizontal) * (9307 / 30375));
+}
+/* Message status */
+#success,
+#failure {
+    font-family: var(--brandonGrotesque);
+    font-size: calc(var(--fontSize) * 2);
+    font-weight: var(--bold);
+    text-align: center;
+    text-shadow: 0px 0px 8px var(--foregroundColor1);
+}
+#success {
+    color: var(--success);
+}
+#failure {
+    color: var(--failure);
+}
+/* Media Queries to fit on a screen of a smartphone on portrait mode */
+@media screen and (device-width: 360px) and (orientation: portrait) {
+    /* Navigation Bar */
+    nav {
+        display: block;
+        height: auto;
+    }
+    #homepageSection,
+    #navigationBarComponents {
+        width: var(--horizontal);
+    }
+    #homepageSection a {
+        margin: 0 calc(var(--horizontal) * 0.436526162);
+    }
+    #homepageSection img {
+        width: auto;
+        height: calc(var(--logoHeight) / 2);
+    }
+    #profile a {
+        margin: 0 calc(var(--horizontal) * (3875 / 11466));
+    }
+    #logout a {
+        margin: 0 calc(var(--horizontal) * (79 / 273));
+    }
+    #navigationBarComponents input,
+    .faSearch {
+        height: calc(
+            var(--vertical) * (0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9 * 0.9)
+        );
+    }
+    /* Welcome Text */
+    #welcomeText h1 {
+        font-size: calc(var(--fontSize) * 2 * (0.9 * 0.9 * 0.9 * 0.9 * 0.9));
+    }
+    /* Message */
+    #message1,
+    #message2 {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9));
+    }
+    /* Search Results */
+    #amountFound {
+        margin: calc(var(--vertical) * 0.02) 0;
+    }
+    #left img {
+        width: var(--horizontal);
+        height: auto;
+    }
+    #foundIsbn h1,
+    #foundStock h1,
+    #foundAuthor h1,
+    #foundTitle h1,
+    #foundPublisher h1,
+    #foundBookLocation h1,
+    #foundCategory h1 {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9 * 0.9));
+        margin: calc(var(--vertical) * 0.02) 0;
+    }
+    #actions {
+        margin: calc(var(--vertical) * 0.01) 0;
+    }
+    #borrow input,
+    #reserve input {
+        padding: calc(var(--vertical) * 0.025) calc(var(--horizontal) * 0.05);
+        font-size: calc(var(--fontSize) * (0.9 * 0.9));
+    }
+    #borrow input {
+        margin: 0 calc(var(--horizontal) * (1431 / 7739));
+    }
+    #reserve input {
+        margin: 0 calc(var(--horizontal) * (1181 / 7739));
+    }
+}
+/* Media Queries to fit on a screen of a smartphone on landscape mode */
+@media screen and (device-width: 640px) and (orientation: landscape) {
+    /* Navigation Bar */
+    #profile a {
+        margin: 0 calc(var(--horizontal) * (1671 / 5200));
+    }
+    #navigationBarComponents input,
+    .faSearch {
+        height: calc(var(--vertical) * (0.9 * 0.9 * 0.9 * 0.9 * 0.9));
+    }
+    #logout a {
+        margin: 0 calc(var(--horizontal) * (557 / 2080));
+    }
+    /* Message */
+    #message1,
+    #message2 {
+        font-size: calc(var(--fontSize) * (0.9 * 0.9 * 0.9));
+    }
+    /* Search Results */
+    #searchResults {
+        margin: 0 calc(var(--horizontal) * 0.05) calc(var(--vertical) * 0.05)
+            calc(var(--horizontal) * 0.05);
+    }
+    #left img {
+        width: auto;
+        height: calc(var(--coverHeight) * (0.9 * 0.9 * 0.9 * 0.9));
+    }
+    #actions {
+        margin: calc(var(--vertical) * 0.01) 0;
+    }
+    #borrow input {
+        margin: 0 calc(var(--horizontal) * (3082 / 14039));
+    }
+    #reserve input {
+        margin: 0 calc(var(--horizontal) * (5547 / 28078));
+    }
+}
